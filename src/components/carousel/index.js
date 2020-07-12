@@ -1,5 +1,4 @@
 import React from 'react';
-import './owl-carousel.css';
 // import './active';
 
 export const ImageCarousel = () => {
@@ -13,7 +12,7 @@ export const ImageCarousel = () => {
                             <div className="row h-100 align-items-center">
                                 <div className="col-12">
                                     <div className="welcome_slide_text">
-                                        <h6 data-animation="bounceInDown" data-delay="0" data-duration="500ms">Get in touch with FlyShop</h6>
+                                        <h6 data-animation="bounceInDown" data-delay={0} data-duration="500ms">Get in touch with FlyShop</h6>
                                         <h2 data-animation="fadeInUp" data-delay="500ms" data-duration="500ms">Fashion Trends</h2>
                                         <a href="#" className="btn karl-btn" data-animation="fadeInUp" data-delay="1s" data-duration="500ms">Shop Now</a>
                                     </div>

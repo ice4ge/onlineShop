@@ -533,10 +533,16 @@ img {
     border-radius: 0;
     color: #fff;
     font-size: 13px;
+    cursor: pointer;
+}
+
+.drop_down {
+    cursor: pointer;
 }
 
 .cart-list li .btn-cart {
     background-color: #3a3a3a;
+    cursor: pointer;
 }
 
 .cart-item-desc > p {
@@ -623,9 +629,58 @@ img {
     top: 0;
     left: 0;
     height: 100%;
-    z-index: 1;
+    z-index: 100;
 }
-
+.nav-side-menu {
+    height: 85%;;
+}
+.menu-list {
+    height: 100%;
+}
+.menu-list h6 {
+    text-align: center;
+    font-size: 30px;
+}
+.menu-list .menu-content {
+    margin-top: 40px;
+}
+.sign_up_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 150px;
+}
+.sign_up_form input {
+    width: 220px;
+    height: 40px;
+    padding-left: 10px;
+    border: none;
+    background-color: #cccccc;
+    outline: aqua;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+}
+.sign_up_form input:focus {
+    border: 2px solid #007bff;
+}
+.sign_up_form button {
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 3px;
+    width: 120px;
+    margin-top: 20px;
+    height: 40px;
+    transition-duration: 1s;
+    font-size: 17px;
+    outline: none;
+}
+.sign_up_form button:hover {
+    background-color: red;
+    border-radius: 50px;
+    border: none;
+    color: white;
+}
 #sideMenuClose {
     color: #fff;
     width: 20%;
@@ -654,10 +709,19 @@ img {
 
 .menu-list h6 {
     padding: 30px 15px;
+    padding-bottom: 15px;
     margin-bottom: 0;
     border-bottom: 1px solid #ebebeb;
+    box-shadow: -4px 3px 3px #cccccc;
 }
-
+.verification {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.menu-content {
+    height: 100%;
+}
 .menu-content ul,
 .menu-content li {
     list-style: none;

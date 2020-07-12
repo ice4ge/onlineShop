@@ -1,24 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-// import initData from './reducers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 
-import { HomePage } from './pages/home';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 // const store = createStore(initData);
 
 ReactDOM.render(
+  <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-          <Route component={App} />
+        <Route component={App} />
       </BrowserRouter>
     </React.StrictMode>
-  ,
+  </Provider>,
   document.getElementById('root')
 );
 

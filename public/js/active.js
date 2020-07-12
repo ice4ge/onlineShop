@@ -30,6 +30,7 @@
     }).trigger("resize");
 
     var welcomeSlide = $('.welcome_slides');
+    console.log('welcome slide', welcomeSlide.owlCarousel);
 
     // :: 2.0 Welcome Slider Active Code
     if ($.fn.owlCarousel) {

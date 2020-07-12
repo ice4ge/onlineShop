@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Link } from "react-router-dom";
 
 export const HeadSection = () => {
+    const dropDown = useRef();
+
+    const openDrop = () => {
+        const target = dropDown.current.style;
+        if(target.display == 'none') {
+            target.display = 'block';
+        }else {
+            target.display = 'none';
+        }
+    }
+
+    const DropStyle = {
+        display: 'none'
+    }
     return (
         <header className="header_area">
                 <div className="top_header_area">
@@ -15,8 +29,8 @@ export const HeadSection = () => {
                                     </div>
                                     <div className="header-cart-menu d-flex align-items-center ml-auto">
                                         <div className="cart">
-                                            <a href="#" id="header-cart-btn" target="_blank"><span className="cart_quantity">2</span> <i className="ti-bag"></i> Your Bag $20</a>
-                                            <ul className="cart-list">
+                                            <p onClick={()=>openDrop()} className="drop_down"><span className="cart_quantity">2</span> <i className="ti-bag"></i> Your Bag $20</p>
+                                            <ul className="cart-list" ref={dropDown} style={DropStyle}>
                                                 <li>
                                                     <a href="#" className="image"><img src="img/product-img/product-10.jpg" className="cart-thumb" alt="" /></a>
                                                     <div className="cart-item-desc">
@@ -35,8 +49,8 @@ export const HeadSection = () => {
                                                 </li>
                                                 <li className="total">
                                                     <span className="pull-right">Total: $20.00</span>
-                                                    <a href="cart.html" className="btn btn-sm btn-cart">Cart</a>
-                                                    <a href="checkout.html" className="btn btn-sm btn-checkout">Checkout</a>
+                                                    <Link className="btn btn-sm btn-cart" to={"/cart"}>Cart</Link>
+                                                    <Link className="btn btn-sm btn-checkout" to={"/checkout"}>Checkout</Link>
                                                 </li>
                                             </ul>
                                         </div>

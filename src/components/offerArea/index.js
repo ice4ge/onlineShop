@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const OfferAreaComponent = () => {
     return (
@@ -13,7 +14,7 @@ export const OfferAreaComponent = () => {
                                 <div className="offer-product-price">
                                     <h3><span className="regular-price">$25.90</span> $15.90</h3>
                                 </div>
-                                <a href="#" className="btn karl-btn mt-30">Shop Now</a>
+                                <Link to="/shop" className="btn karl-btn mt-30">Shop Now</Link>
                             </div>
                         </div>
                     </div>

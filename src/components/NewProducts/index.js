@@ -1,9 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import { ProductsList } from './products';
 
 export const NewProductsComponent = ({ products }) => {
     const [initial, setProduct] = useState('ALL');
+    const style = {
+        height: '1470px'
+    }
+
+    const productWindow = useRef();
+    useEffect(() => {
+        productWindow.current.style = style;
+    },[])
 
  
     return (
@@ -30,9 +38,9 @@ export const NewProductsComponent = ({ products }) => {
                 </div>
 
                 <div class="container">
-                    <div class="row karl-new-arrivals">
+                    <div class="row karl-new-arrivals" ref={productWindow} style={style}>
                         {products.map((item, i) =>
-                            <ProductsList gender={item.gender} productState={initial} img={item.img} price={item.price} description={item.description} />
+                            <ProductsList gender={item.gender} Obj={products[i]} productState={initial} img={item.img} price={item.price} description={item.description} />
                         )}
                     </div>
                 </div>

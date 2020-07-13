@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SideBar = () => {
+export const SideBar = ({sideBarOpen}) => {
     return (
         <div class="catagories-side-menu">
-            <div id="sideMenuClose">
+            <div onClick={()=>sideBarOpen()} id="sideMenuClose">
                 <i class="ti-close"></i>
             </div>
             <div class="nav-side-menu">

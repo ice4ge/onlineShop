@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { CartProducts } from './products';
+import { Link } from 'react-router-dom';
 
 export const CartProductStateComponent = () => {
     const products = useSelector(state => state.CartReducer);
@@ -28,7 +29,7 @@ export const CartProductStateComponent = () => {
                 </div>
                 <div className="cart-footer d-flex mt-30">
                     <div className="back-to-shop w-50">
-                        <a href="shop-grid-left-sidebar.html">Continue shoping</a>
+                        <Link to="/shop">Continue shoping</Link>
                     </div>
                     <div className="update-checkout w-50 text-right">
                         <a href="#">clear cart</a>

@@ -25,7 +25,6 @@ export const HomePage = () => {
     console.log("firebase", store.collectionGroup);
 
     useEffect(() => {
-        dispatch({ type: actions.TOTAL_PRODUCTS });
         dispatch({ type: actions.PREVIEW_CHANGE });
     }, [])
     const products = useSelector(state => state.ProductsService);

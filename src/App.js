@@ -10,37 +10,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import { TOTAL_PRODUCTS } from './store/actions/actionNames';
+
 export default function App() {
   const store = firebase.firestore();
+  const dispatch = useDispatch();
   store.collection("AllShops")
         .get()
         .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-
-            for(var i = 0; i < data.length; i++) {
-              let productList = [];
-                for(var k = 0; k < data[i].products.length; k++) {
-                    for(var j = 0; j < data[i].products[k].images.length; j++) {
-                      const Object = {
-                        name: data[i].products[k].productName,
-                        img: data[i].products[k].images[j],
-                        price: data[i].products[k].productPrice,
-                        description: data[i].products[k].description,
-                        gender: data[i].products[k].gender,
-                        brand: data[i].shopName,
-                        category: data[i].products[k].category,
-                        size: data[i].products[k].productSize,
-                        color: data[i].products[k].color,
-                        ar: data[i].products[k].ar,
-                        sale: data[i].products[k].sale,
-                        type: data[i].products[k].type
-                      }
-                      productList.push(Object);
-                    }
-                }
-            }
-
-            console.log(data); // array of cities objects
+           const data = [...querySnapshot.docs.map(doc => doc.data())];
+            
+            dispatch({type: TOTAL_PRODUCTS, payLoad: data});
         });
   return (
       <Switch>

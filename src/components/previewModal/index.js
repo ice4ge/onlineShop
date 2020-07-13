@@ -1,7 +1,14 @@
 import React from 'react';
+import { CART_ADD } from '../../store/actions/actionNames';
+import {useDispatch} from 'react-redux';
 
 export const PreviewModal = ({PreviewState}) => {
     console.log("preview", PreviewState);
+    const dispatch = useDispatch();
+
+    const cartAdd = () => {
+        dispatch({type: CART_ADD, payLoad: PreviewState});
+    }
     return (
         <div className="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -41,7 +48,7 @@ export const PreviewModal = ({PreviewState}) => {
 
                                                 <span className="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i className="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
-                                            <button type="submit" name="addtocart" value="5" className="cart-submit">Add to cart</button>
+                                            <p onClick={()=>cartAdd()} className="cart-submit">Add to cart</p>
                                             <div className="modal_pro_wishlist">
                                                 <a href="wishlist.html" target="_blank"><i className="ti-heart"></i></a>
                                             </div>

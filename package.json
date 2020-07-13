@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@version/react-router-v3": "^1.0.0",
     "@version/react-router-v4": "^1.0.0",
+    "firebase": "^7.16.0",
     "react": "^16.13.1",
     "react-animated-slider": "^2.0.0",
     "react-bootstrap": "^1.2.1",

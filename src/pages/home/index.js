@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {  useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Carousel } from 'react-bootstrap';
 import * as actions from '../../store/actions/actionNames';
-// import Slider from 'react-animated-slider';
-// import 'react-animated-slider/build/horizontal.css';
 
 import { HeaderComponent } from '../../components/header';
 
@@ -28,27 +26,15 @@ export const HomePage = () => {
     }, [])
     const products = useSelector(state => state.ProductsService);
     const PreviewState = useSelector(state => state.ProductPreview);
-
-    const mainBody = useRef();
-    const sideBarOpen = () => {
-        const target = mainBody.current.style;
-        if (target.left == '0px') {
-            target.left = '300px';
-            mainBody.current.className = "karl-side-menu-open";
-        } else {
-            target.left = '0px';
-            mainBody.current.className = "";
-        }
-    }
     const style = {
-        left: '0px',
+        left: '0px'
     }
 
     return (
         <div>
-            <SideBar sideBarOpen={sideBarOpen} />
-            <div id="wrapper" ref={mainBody} style={style}>
-                <HeaderComponent sideBarOpen={sideBarOpen} />
+            <SideBar  />
+            <div id="wrapper" style={style}>
+                <HeaderComponent />
                 <section className="welcome_area">
                     <div className="welcome_slides owl-carousel">
                         <Carousel>

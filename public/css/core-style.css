@@ -1042,9 +1042,11 @@ img {
     border: medium none;
     color: #fff;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 15px;
     height: 35px;
     margin-left: 15px;
+    text-align: center;
+    padding-top: 5px;
     width: 120px;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;

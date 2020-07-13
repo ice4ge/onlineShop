@@ -4,9 +4,8 @@ import { BagState } from './bagMenu';
 
 import { useSelector } from 'react-redux';
 
-export const HeadSection = ({sideBarOpen}) => {
+export const HeadSection = () => {
     const dropDown = useRef();
-
     const openDrop = () => {
         const target = dropDown.current.style;
         if (target.display == 'none') {
@@ -26,6 +25,16 @@ export const HeadSection = ({sideBarOpen}) => {
 
     const DropStyle = {
         display: 'none'
+    }
+    const sideBarToggle = () => {
+        const target = document.getElementById('wrapper').style;
+        if(target.left == '0px') {
+            target.left = '300px';
+            document.getElementById('wrapper').className = "karl-side-menu-open";
+        }else {
+            target.left = '0px';
+            document.getElementById('wrapper').className = "";
+        }
     }
 
     return (
@@ -56,7 +65,7 @@ export const HeadSection = ({sideBarOpen}) => {
                                         </ul>
                                     </div>
                                     <div className="header-right-side-menu ml-15">
-                                        <p id="sideMenuBtn" onClick={() => sideBarOpen()}><i className="ti-user" aria-hidden="true"></i></p>
+                                        <p id="sideMenuBtn" onClick={() => sideBarToggle()}><i className="ti-user" aria-hidden="true"></i></p>
                                     </div>
                                 </div>
                             </div>

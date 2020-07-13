@@ -4,7 +4,14 @@ import { ProductsList } from './products';
 
 export const NewProductsComponent = ({ products }) => {
     const [initial, setProduct] = useState('ALL');
-   
+    const style = {
+        height: '1470px'
+    }
+
+    const productWindow = useRef();
+    useEffect(() => {
+        productWindow.current.style = style;
+    },[])
 
  
     return (

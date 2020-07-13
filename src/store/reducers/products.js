@@ -1,6 +1,8 @@
 import { products } from './initial';
 import * as actions from '../actions/actionNames';
 
+const store = firebase.firestore();
+
 export const ProductsService = (state = [], action) => {
     switch (action.type) {
         case actions.TOTAL_PRODUCTS:

@@ -7,13 +7,14 @@ import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+
 // const store = createStore(initData);
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <BrowserRouter>
-        <Route component={App} />
+          <Route component={App} />
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,

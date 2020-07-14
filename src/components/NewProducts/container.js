@@ -22,6 +22,8 @@ export const NewProductsComponent = ({ products }) => {
             setShowcase(products.filter(item => item[filterType] == filterKey));
         }
     }
+    data = new Date();
+    console.log()
  
     return (
         <div>

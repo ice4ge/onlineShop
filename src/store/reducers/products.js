@@ -6,7 +6,6 @@ export const ProductsService = (state = [], action) => {
     switch (action.type) {
         case actions.TOTAL_PRODUCTS:
             const dataList = action.payLoad;
-            console.log('reducer',dataList)
             let datas = [];
             dataList.forEach(element => {
                 const shopProducts = element.products;
@@ -25,7 +24,8 @@ export const ProductsService = (state = [], action) => {
                                 color: productItem.color,
                                 ar: productItem.ar,
                                 sale: productItem.sale,
-                                type: productItem.type
+                                type: productItem.type,
+                                date: productItem.date
                             };
                             datas.push(productItems);
                             productsList.push(productItems);

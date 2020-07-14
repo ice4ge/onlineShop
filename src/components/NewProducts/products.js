@@ -32,7 +32,6 @@ export const ProductsList = (props) => {
                         spaceBetween={0}
                         slidesPerView={0}
                         scrollbar={{ draggable: true }}
-                        onSwiper={(swiper) => console.log(swiper)}
                     >
                         {props.img.map((item, i) =>
                             <SwiperSlide>

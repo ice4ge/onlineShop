@@ -22,7 +22,6 @@ export const ShopPage = () => {
     const filter = (filterKey, filterType) => {
             setShowcase(products.filter(item => item[filterKey] == filterType));
     }
-    console.log("shop filter====..", showCase);
 
 
     return (

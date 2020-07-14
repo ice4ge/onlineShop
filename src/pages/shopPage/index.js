@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
 
 import { HeaderComponent } from '../../components/header';
 import { Footer } from '../../components/footer';
@@ -16,6 +17,8 @@ export const ShopPage = () => {
     }
     const products = useSelector(state => state.ProductsService);
     const PreviewState = useSelector(state => state.ProductPreview);
+
+
 
     return (
         <div>

@@ -1,7 +1,7 @@
 import { products } from './initial';
 import * as actions from '../actions/actionNames';
 
-
+let productsList = [];
 export const ProductsService = (state = [], action) => {
     switch (action.type) {
         case actions.TOTAL_PRODUCTS:
@@ -13,7 +13,7 @@ export const ProductsService = (state = [], action) => {
                 if (shopProducts) {
                     shopProducts.forEach(productItem => {
 
-                            const Object = {
+                            const productItems = {
                                 name: productItem.productName,
                                 img: productItem.images,
                                 price: productItem.productPrice,
@@ -27,17 +27,14 @@ export const ProductsService = (state = [], action) => {
                                 sale: productItem.sale,
                                 type: productItem.type
                             };
-                            datas.push(Object);
+                            datas.push(productItems);
+                            productsList.push(productItems);
                     })
                 }
             });
-            console.log('products',datas);
-
-
             return state = datas;
-        default:
-            return state;
     }
+    return state;
 }
 
 

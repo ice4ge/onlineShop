@@ -754,7 +754,7 @@ img {
     border-bottom: 1px solid #ebebeb;
 }
 
-.menu-content li a {
+.menu-content li p {
     position: relative;
     z-index: 1;
     text-decoration: none;
@@ -764,6 +764,21 @@ img {
     line-height: 45px;
     padding-left: 30px;
     font-size: 13px;
+    margin: 0px;
+}
+.menu-content li p:before {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #858585;
+    background-color: transparent;
+    border-radius: 2px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
 }
 
 .menu-content .sub-menu li a {
@@ -791,7 +806,33 @@ img {
     left: 0;
 }
 
-.menu-content > li > a:before {
+.menu-content .sub-menu li p {
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    color: #3a3a3a;
+    height: 40px;
+    display: inline-block;
+    line-height: 40px;
+    cursor: default;
+}
+
+.menu-content li .sub-menu li p:before {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #858585;
+    background-color: transparent;
+    border-radius: 2px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+.menu-content > li > p:before {
     width: 10px;
     height: 10px;
     border: 1px solid #ff084e;
@@ -806,7 +847,7 @@ img {
     left: 0;
 }
 
-.menu-content > li.collapsed > a:before {
+.menu-content > li.collapsed > p:before {
     width: 10px;
     height: 10px;
     border: 1px solid #858585;

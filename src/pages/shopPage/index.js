@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import { HeaderComponent } from '../../components/header';
 import { Footer } from '../../components/footer';
 import { FilterArea } from '../../components/filterArea';
-import { ShopFilteredResult } from '../../components/shopFilterResult';
+import { ShopFilteredResult } from '../../components/shopFilterResult/mainWindow';
 import { SideBar } from '../../components/sideBar';
 import { PreviewModal } from '../../components/previewModal';
 
@@ -17,7 +17,12 @@ export const ShopPage = () => {
     }
     const products = useSelector(state => state.ProductsService);
     const PreviewState = useSelector(state => state.ProductPreview);
+    const [showCase, setShowcase] = useState(products);
 
+    const filter = (filterKey, filterType) => {
+            setShowcase(products.filter(item => item[filterKey] == filterType));
+    }
+    console.log("shop filter====..", showCase);
 
 
     return (
@@ -28,8 +33,8 @@ export const ShopPage = () => {
                 <section className="shop_grid_area section_padding_100">
                     <div className="container">
                         <div className="row">
-                            <FilterArea />
-                            <ShopFilteredResult products={products}/>
+                            <FilterArea filter={filter} />
+                            <ShopFilteredResult products={showCase}/>
                         </div>
                     </div>
                 </section>

@@ -3,6 +3,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsList } from './products';
 
+
 export const NewProductsComponent = ({ products }) => {
     const style = {
         height: '1470px'

@@ -9,6 +9,7 @@
     "@version/react-router-v3": "^1.0.0",
     "@version/react-router-v4": "^1.0.0",
     "firebase": "^7.16.0",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-animated-slider": "^2.0.0",
     "react-bootstrap": "^1.2.1",

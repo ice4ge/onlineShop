@@ -4,17 +4,26 @@ import { useDispatch } from 'react-redux';
 import { CART_ADD } from '../../store/actions/actionNames';
 import { PREVIEW_SET } from '../../store/actions/actionNames';
 
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+
 export const ShopFilteredResult = ({ products }) => {
 
     const dispatch = useDispatch();
 
 
     const addCart = (product) => {
-        dispatch({type: CART_ADD, payLoad: product});
+        dispatch({ type: CART_ADD, payLoad: product });
     }
 
     const setProductPreview = (preview) => {
-        dispatch({type: PREVIEW_SET, payLoad: preview});
+        dispatch({ type: PREVIEW_SET, payLoad: preview });
     }
     return (
         <div className="col-12 col-md-8 col-lg-9">
@@ -24,11 +33,21 @@ export const ShopFilteredResult = ({ products }) => {
                         <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
 
                             <div className="product-img">
-                                {item.img.map((index, i) => 
-                                    <img src={index} alt="" />
-                                )}
+                                <Swiper
+                                    spaceBetween={0}
+                                    slidesPerView={3}
+                                    Navigation
+                                    scrollbar={{ draggable: true }}
+                                    onSwiper={(swiper) => console.log(swiper)}
+                                >
+                                    {item.img.map((index, i) =>
+                                        <SwiperSlide>
+                                                <img src={index} alt="" />
+                                        </SwiperSlide>
+                                    )}
+                                </Swiper>
                                 <div className="product-quicview">
-                                    <a href="#" data-toggle="modal" data-target="#quickview" onClick={()=>setProductPreview(item)}><i className="ti-plus"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#quickview" onClick={() => setProductPreview(item)}><i className="ti-plus"></i></a>
                                 </div>
                             </div>
                             <div className="product-description">

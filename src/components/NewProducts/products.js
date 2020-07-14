@@ -2,6 +2,16 @@ import React from 'react';
 import { PREVIEW_SET } from '../../store/actions/actionNames';
 import { CART_ADD } from '../../store/actions/actionNames';
 import { useDispatch } from 'react-redux';
+import './style.css';
+
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 
 
@@ -16,23 +26,32 @@ export const ProductsList = (props) => {
     }
     return (
         <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
-                <div className="product_item">
-                    <div class="product-img">
-                            {props.img.map((item, i) =>
-                                    <div className="new_product_item">
-                                        <img src={item} alt="" />
-                                        <div class="product-quicview">
-                                            <a href="#" data-toggle="modal" data-target="#quickview" onClick={() => setProductPreview()}><i class="ti-plus"></i></a>
-                                        </div>
+            <div className="product_item">
+                <div class="product-img">
+                    <Swiper
+                        spaceBetween={0}
+                        slidesPerView={0}
+                        scrollbar={{ draggable: true }}
+                        onSwiper={(swiper) => console.log(swiper)}
+                    >
+                        {props.img.map((item, i) =>
+                            <SwiperSlide>
+                                <div className="new_product_item">
+                                    <img src={item} alt="" />
+                                    <div class="product-quicview">
+                                        <a href="#" data-toggle="modal" data-target="#quickview" onClick={() => setProductPreview()}><i class="ti-plus"></i></a>
                                     </div>
-                            )}
-                    </div>
-                    <div class="product-description">
-                        <h4 class="product-price">${props.price}</h4>
-                        <p>{props.description}</p>
-                        <p class="add-to-cart-btn" onClick={() => addCart()}>ADD TO CART</p>
-                    </div>
+                                </div>
+                            </SwiperSlide>
+                        )}
+                    </Swiper>
                 </div>
+                <div class="product-description">
+                    <h4 class="product-price">${props.price}</h4>
+                    <p>{props.description}</p>
+                    <p class="add-to-cart-btn" onClick={() => addCart()}>ADD TO CART</p>
+                </div>
+            </div>
 
         </div>
 

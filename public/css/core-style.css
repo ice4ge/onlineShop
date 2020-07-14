@@ -1178,17 +1178,23 @@ img {
 
 .single_gallery_item {
     margin-bottom: 100px;
-    overflow: hidden
+    overflow: hidden;
+    height: 100%;
 }
 
 .product-img {
     position: relative;
     z-index: 1;
-    overflow: hidden
+    overflow: hidden;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-img > img {
-    width: 100%;
+    width: 50%;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
 }
@@ -1219,6 +1225,13 @@ img {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
+}
+.product_item {
+    height: 100%;
+}
+.new_product_item {
+    width: 50%;
+    display: inline-block;
 }
 
 .product-img:hover .product-quicview {

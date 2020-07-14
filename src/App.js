@@ -19,6 +19,7 @@ export default function App() {
         .get()
         .then(querySnapshot => {
            const data = [...querySnapshot.docs.map(doc => doc.data())];
+           console.log('llllllllllllll', data)
             
             dispatch({type: TOTAL_PRODUCTS, payLoad: data});
         });

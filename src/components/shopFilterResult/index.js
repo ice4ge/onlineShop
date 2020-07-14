@@ -8,6 +8,8 @@ export const ShopFilteredResult = ({ products }, props) => {
 
     const dispatch = useDispatch();
 
+    console.log("shop result", products);
+
     const addCart = (product) => {
         dispatch({type: CART_ADD, payLoad: product});
     }
@@ -23,7 +25,9 @@ export const ShopFilteredResult = ({ products }, props) => {
                         <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
 
                             <div className="product-img">
-                                <img src={item.img} alt="" />
+                                {item.img.map((index, i) => 
+                                    <img src={index} alt="" />
+                                )}
                                 <div className="product-quicview">
                                     <a href="#" data-toggle="modal" data-target="#quickview" onClick={()=>setProductPreview(item)}><i className="ti-plus"></i></a>
                                 </div>

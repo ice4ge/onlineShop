@@ -16,13 +16,10 @@ import { Footer } from '../../components/footer';
 import { PreviewModal } from '../../components/previewModal';
 import { SideBar } from '../../components/sideBar';
 
-import firebase from '../../components/firebase';
 
 
 export const HomePage = () => {
     const dispatch = useDispatch();
-    const store = firebase.firestore();
-    console.log("firebase", store.collectionGroup);
 
     useEffect(() => {
         dispatch({ type: actions.PREVIEW_CHANGE });
@@ -32,15 +29,6 @@ export const HomePage = () => {
     const style = {
         left: '0px'
     }
-    // useEffect(()=> {
-    //     store.collection('AllShops').doc('Gucci').collection('products').get()
-    //     .then(response => {
-    //         console.log('This is data from firebase', response);
-    //     })
-    //     .catch(error => {
-    //         console.log('err fetch data');
-    //     })
-    // })
 
 
     return (

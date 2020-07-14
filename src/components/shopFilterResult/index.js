@@ -1,133 +1,40 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-export const ShopFilteredResult = () => {
+import { CART_ADD } from '../../store/actions/actionNames';
+import { PREVIEW_SET } from '../../store/actions/actionNames';
+
+export const ShopFilteredResult = ({ products }, props) => {
+
+    const dispatch = useDispatch();
+
+    const addCart = (product) => {
+        dispatch({type: CART_ADD, payLoad: product});
+    }
+
+    const setProductPreview = (preview) => {
+        dispatch({type: PREVIEW_SET, payLoad: preview});
+    }
     return (
         <div className="col-12 col-md-8 col-lg-9">
             <div className="shop_grid_product_area">
                 <div className="row">
+                    {products.map((item, i) =>
+                        <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
 
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.2s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
+                            <div className="product-img">
+                                <img src={item.img} alt="" />
+                                <div className="product-quicview">
+                                    <a href="#" data-toggle="modal" data-target="#quickview" onClick={()=>setProductPreview(item)}><i className="ti-plus"></i></a>
+                                </div>
+                            </div>
+                            <div className="product-description">
+                                <h4 className="product-price">${item.price}</h4>
+                                <p>{item.name}</p>
+                                <p class="add-to-cart-btn" onClick={() => addCart(item)}>ADD TO CART</p>
                             </div>
                         </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.3s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-2.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.4s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-3.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.5s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-4.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.6s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-5.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.7s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-6.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.8s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-7.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="0.9s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-8.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div className="col-12 col-sm-6 col-lg-4 single_gallery_item wow fadeInUpBig" data-wow-delay="1s">
-                        <div className="product-img">
-                            <img src="img/product-img/product-9.jpg" alt="" />
-                            <div className="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i className="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <div className="product-description">
-                            <h4 className="product-price">$39.90</h4>
-                            <p>Jeans midi cocktail dress</p>
-                            <a href="#" className="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
 

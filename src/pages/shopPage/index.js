@@ -5,11 +5,18 @@ import { Footer } from '../../components/footer';
 import { FilterArea } from '../../components/filterArea';
 import { ShopFilteredResult } from '../../components/shopFilterResult';
 import { SideBar } from '../../components/sideBar';
+import { PreviewModal } from '../../components/previewModal';
+
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export const ShopPage = () => {
     const style = {
         left: '0px'
     }
+    const products = useSelector(state => state.ProductsService);
+    const PreviewState = useSelector(state => state.ProductPreview);
+
     return (
         <div>
             <SideBar />
@@ -19,10 +26,11 @@ export const ShopPage = () => {
                     <div className="container">
                         <div className="row">
                             <FilterArea />
-                            <ShopFilteredResult />
+                            <ShopFilteredResult products={products}/>
                         </div>
                     </div>
                 </section>
+                <PreviewModal PreviewState={PreviewState} />
                 <Footer />
             </div>
         </div>

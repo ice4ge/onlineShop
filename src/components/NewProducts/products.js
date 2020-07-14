@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { PREVIEW_SET } from '../../store/actions/actionNames';
 import { CART_ADD } from '../../store/actions/actionNames';
 import {useDispatch} from 'react-redux';
@@ -9,7 +9,6 @@ export const ProductsList = (props) => {
     const setProductPreview = () => {
         dispatch({type: PREVIEW_SET, payLoad: props.Obj});
     }
-
     const addCart = () => {
         dispatch({type: CART_ADD, payLoad: props.Obj});
     }

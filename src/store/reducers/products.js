@@ -30,9 +30,7 @@ export const ProductsService = (state = [], action) => {
                                 type: productItem.type
                             };
                             datas.push(Object);
-
                         })
-
                     })
                 }
             });
@@ -44,6 +42,8 @@ export const ProductsService = (state = [], action) => {
             return state;
     }
 }
+
+
 
 export const ProductPreview = (state = {}, action) => {
     switch (action.type) {

@@ -8,7 +8,8 @@ export const NewProductsComponent = ({ products }) => {
     const style = {
         height: '1470px'
     }
-    const [initialShowcase, setShowcase] = useState(products);
+    const [initialShowcase, setShowcase] = useState(products.sort(function(a,b){
+        return new Date(b.date) - new Date(a.date) }));
 
     const productWindow = useRef();
     useEffect(() => {
@@ -22,9 +23,8 @@ export const NewProductsComponent = ({ products }) => {
             setShowcase(products.filter(item => item[filterType] == filterKey));
         }
     }
-    data = new Date();
-    console.log()
- 
+    
+    console.log('sorted array,', initialShowcase);
     return (
         <div>
             <section class="new_arrivals_area section_padding_100_0 clearfix">
@@ -50,7 +50,7 @@ export const NewProductsComponent = ({ products }) => {
 
                 <div class="container">
                     <div class="row karl-new-arrivals" ref={productWindow} style={style}>
-                        {initialShowcase.map((item, i) =>
+                        {initialShowcase.slice(0, 6).map((item, i) =>
                             <ProductsList gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
                         )}
                     </div>

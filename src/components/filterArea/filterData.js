@@ -29,6 +29,10 @@ export const filterBytypes = [
                 text: 'Baldi',
                 target: 'brand',
                 filter: 'Baldi',
+            },{
+                text: 'Gucci',
+                target: 'brand',
+                filter: 'Gucci',
             }
         ]
     },{

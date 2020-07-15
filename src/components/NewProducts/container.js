@@ -5,16 +5,11 @@ import { ProductsList } from './products';
 
 
 export const NewProductsComponent = ({ products }) => {
-    const style = {
-        height: '1470px'
-    }
-    const [initialShowcase, setShowcase] = useState(products.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date) }));
+    console.log('initial array', products);
+    const [initialShowcase, setShowcase] = useState([...products.sort(function(a,b){
+        return new Date(b.date) - new Date(a.date) })]);
+    
 
-    const productWindow = useRef();
-    useEffect(() => {
-        productWindow.current.style = style;
-    },[])
 
     const filter = (filterKey, filterType) => {
         if(filterKey == 'all') {
@@ -49,7 +44,7 @@ export const NewProductsComponent = ({ products }) => {
                 </div>
 
                 <div class="container">
-                    <div class="row karl-new-arrivals" ref={productWindow} style={style}>
+                    <div class="row karl-new-arrivals">
                         {initialShowcase.slice(0, 6).map((item, i) =>
                             <ProductsList gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
                         )}

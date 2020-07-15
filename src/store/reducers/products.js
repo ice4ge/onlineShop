@@ -1,9 +1,11 @@
 import * as actions from '../actions/actionNames';
 
-let productsList = [];
 export const ProductsService = (state = [], action) => {
     switch (action.type) {
         case actions.TOTAL_PRODUCTS:
+            return state = action.payLoad;
+        case actions.GET_FILTER:
+            console.log('reducer filterr', action.payLoad)
             return state = action.payLoad;
     }
     return state;

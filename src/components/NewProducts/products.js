@@ -8,6 +8,7 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
+import { Carousel } from 'react-bootstrap';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -28,22 +29,18 @@ export const ProductsList = (props) => {
         <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
             <div className="product_item">
                 <div class="product-img">
-                    <Swiper
-                        spaceBetween={0}
-                        slidesPerView={0}
-                        scrollbar={{ draggable: true }}
-                    >
+                    <Carousel controls={false}>
                         {props.img.map((item, i) =>
-                            <SwiperSlide>
+                            <Carousel.Item>
                                 <div className="new_product_item">
-                                    <img src={item} alt="" />
+                                    <img className="carouse_images" src={item} alt="" />
                                     <div class="product-quicview">
                                         <a href="#" data-toggle="modal" data-target="#quickview" onClick={() => setProductPreview()}><i class="ti-plus"></i></a>
                                     </div>
                                 </div>
-                            </SwiperSlide>
+                            </Carousel.Item>
                         )}
-                    </Swiper>
+                    </Carousel>
                 </div>
                 <div class="product-description">
                     <h4 class="product-price">${props.price}</h4>

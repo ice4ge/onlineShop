@@ -33,6 +33,10 @@ export const filterBytypes = [
                 text: 'Gucci',
                 target: 'brand',
                 filter: 'Gucci',
+            },{
+                text: 'Puma',
+                target: 'brand',
+                filter: 'Puma',
             }
         ]
     },{
@@ -41,16 +45,16 @@ export const filterBytypes = [
         subProperty: [
             {
                 text: 'Clothes',
-                target: 'հագուստ',
-                filter: 'type',
+                target: 'category',
+                filter: 'Հագուստ',
             },{
                 text: 'Shoes',
-                target: 'կոշիկ',
-                filter: 'type',
+                target: 'category',
+                filter: 'Կոշիկ',
             },{
                 text: 'Accessories',
-                target: 'կոշիկ',
-                filter: 'type',
+                target: 'category',
+                filter: 'Աքսեսուարներ',
             }
         ]
     },{
@@ -63,8 +67,8 @@ export const filterBytypes = [
                 filter: 'type'
             },{
                 text: 'Bottom',
-                target: 'հատակը',
-                filter: 'type'
+                target: 'type',
+                filter: 'Պայուսակներ'
             },{
                 text: 'Underwear',
                 target: 'հատակը',

@@ -46,15 +46,15 @@ export const filterBytypes = [
             {
                 text: 'Clothes',
                 target: 'category',
-                filter: 'Հագուստ',
+                filter: ["Կոստյումներ", "Շապիկներ", "Շապիկներ : Պոլոներ", "Տաբատներ", "Շորտեր", "Ջինս", "Հուդիներ և Սվիտրներ", "Բաճկոններ", "Լողազգեստեր", "Սպորտային Հագուստ", "Գուլպա"],
             },{
                 text: 'Shoes',
                 target: 'category',
-                filter: 'Կոշիկ',
+                filter:  ["Ամառային դասական", "Սանդալ", "Ամառային սպորտային", "Դասական կոշիկ​", "Չարոխ", "Սպորտային", "Կիսաճտքավոր դասական", "Կիսաճտքավոր սպորտային", "Ուգգի"],
             },{
                 text: 'Accessories',
                 target: 'category',
-                filter: 'Աքսեսուարներ',
+                filter: ["Ժամացույցներ","Արևային ակնոց","Պայուսակներ","Գլխարկներ","Գոտիներ","Զարդեր"],
             }
         ]
     },{
@@ -63,16 +63,16 @@ export const filterBytypes = [
         subProperty: [
             {
                 text: 'Top',
-                target: 'գագաթ',
-                filter: 'type'
+                target: 'type',
+                filter: 'Ջինս'
             },{
                 text: 'Bottom',
                 target: 'type',
-                filter: 'Պայուսակներ'
+                filter: 'Տաբատներ'
             },{
                 text: 'Underwear',
-                target: 'հատակը',
-                filter: 'type'
+                target: 'type',
+                filter: 'Ներքնազգեստ'
             }
         ]
     },{

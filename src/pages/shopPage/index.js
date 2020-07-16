@@ -20,7 +20,8 @@ export const ShopPage = () => {
     const [showCase, setShowcase] = useState(products);
     const store = firebase.firestore();
     const dispatch = useDispatch();
-    const filter = (filterKey, filterType) => {
+    var filter = require('lodash.filter');
+    const filterArray = (filterKey, filterType) => {
         if (filterKey == 'price') {
             setShowcase(products.filter(item => item[filterKey] <= filterType));
         } else if (filterKey == 'brand') {
@@ -37,7 +38,7 @@ export const ShopPage = () => {
                             price: itemObject.productPrice,
                             description: itemObject.description,
                             gender: itemObject.gender,
-                            brand: 'Puma',
+                            brand: filterType,
                             category: itemObject.category,
                             size: itemObject.productSize,
                             color: itemObject.color,
@@ -52,8 +53,13 @@ export const ShopPage = () => {
                     dispatch({ type: GET_FILTER, payLoad: realData });
                 })
                 setShowcase(products);
-        } else {
-            setShowcase(products.filter(item => item[filterKey] == filterType));
+        } else if(filterKey == 'gender'){
+            setShowcase(products.filter(item => item.gender == filterType))
+        }else if(filterKey == 'category') {
+            console.log(filterKey, filterType)
+            let filtered = [];
+            
+            console.log(filtered);
         }
     }
     useEffect(()=> {
@@ -69,7 +75,7 @@ export const ShopPage = () => {
                 <section className="shop_grid_area section_padding_100">
                     <div className="container">
                         <div className="row">
-                            <FilterArea filter={filter} />
+                            <FilterArea filter={filterArray} />
                             <ShopFilteredResult products={showCase} />
                         </div>
                     </div>

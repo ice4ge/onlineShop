@@ -2,6 +2,8 @@ import React, {useState, useEffect, useRef} from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductsList } from './products';
+import {shoes} from './filterData';
+import { accessory } from './filterData';
 
 
 export const NewProductsComponent = ({ products }) => {
@@ -14,8 +16,26 @@ export const NewProductsComponent = ({ products }) => {
     const filter = (filterKey, filterType) => {
         if(filterKey == 'all') {
             setShowcase(products);
-        }else {
-            setShowcase(products.filter(item => item[filterType] == filterKey));
+        }else if(filterType == 'shoes') {
+            let filtered = [];
+            products.map(function(item, i) {
+                for(var i = 0; i < shoes.length; i++) {
+                    if(item.category == shoes[i]) {
+                        filtered.push(item);
+                    }
+                }
+            })
+            setShowcase(filtered);
+        }else if(filterType == 'accessory') {
+            let filtered = [];
+            products.map(function(item, i) {
+                for(var i = 0; i < accessory.length; i++) {
+                    if(item.category == accessory[i]) {
+                        filtered.push(item);
+                    }
+                }
+            })
+            setShowcase(filtered);
         }
     }
     useEffect(()=> {
@@ -42,8 +62,8 @@ export const NewProductsComponent = ({ products }) => {
                         <button class="btn" onClick={()=>filter('all', 'type')}>ALL</button>
                         <button class="btn" onClick={()=>filter('Իգական', 'gender')}>WOMAN</button>
                         <button class="btn" onClick={()=>filter('Արական', 'gender')}>MAN</button>
-                        <button class="btn" onClick={()=>filter('Կոշիկ', 'category')}>SHOES</button>
-                        <button class="btn" onClick={()=>filter('Աքսեսուարներ', 'category')}>ACCESSORIES</button>
+                        <button class="btn" onClick={()=>filter('Կոշիկ', 'shoes')}>SHOES</button>
+                        <button class="btn" onClick={()=>filter('Աքսեսուարներ', 'accessory')}>ACCESSORIES</button>
                     </div>
                 </div>
 

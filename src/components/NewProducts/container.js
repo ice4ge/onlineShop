@@ -6,8 +6,8 @@ import { ProductsList } from './products';
 
 export const NewProductsComponent = ({ products }) => {
     console.log('initial array', products);
-    const [initialShowcase, setShowcase] = useState([...products.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date) })]);
+    const [initialShowcase, setShowcase] = useState(products.sort(function(a,b){
+        return new Date(b.date) - new Date(a.date) }));
     
 
 
@@ -18,6 +18,10 @@ export const NewProductsComponent = ({ products }) => {
             setShowcase(products.filter(item => item[filterType] == filterKey));
         }
     }
+    useEffect(()=> {
+        setShowcase([...products.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date) })]);
+    },[products])
     
     console.log('sorted array,', initialShowcase);
     return (
@@ -38,8 +42,8 @@ export const NewProductsComponent = ({ products }) => {
                         <button class="btn" onClick={()=>filter('all', 'type')}>ALL</button>
                         <button class="btn" onClick={()=>filter('Իգական', 'gender')}>WOMAN</button>
                         <button class="btn" onClick={()=>filter('Արական', 'gender')}>MAN</button>
-                        <button class="btn" onClick={()=>filter('Իգական', 'gender')}>SHOES</button>
-                        <button class="btn" onClick={()=>filter('Իգական', 'gender')}>ACCESSORIES</button>
+                        <button class="btn" onClick={()=>filter('Կոշիկ', 'category')}>SHOES</button>
+                        <button class="btn" onClick={()=>filter('Աքսեսուարներ', 'category')}>ACCESSORIES</button>
                     </div>
                 </div>
 

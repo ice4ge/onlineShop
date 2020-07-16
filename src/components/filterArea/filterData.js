@@ -24,7 +24,7 @@ export const filterBytypes = [
             },{
                 text: 'Mexx',
                 target: 'brand',
-                filter: 'Mexx',
+                filter: 'MEXX',
             },{
                 text: 'Baldi',
                 target: 'brand',

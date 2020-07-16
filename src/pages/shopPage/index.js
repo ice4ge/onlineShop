@@ -59,7 +59,6 @@ export const ShopPage = () => {
     useEffect(()=> {
         setShowcase(products)
     },[products])
-    console.log('products', showCase)
 
 
     return (

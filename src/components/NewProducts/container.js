@@ -1,36 +1,41 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { ProductsList } from './products';
-import {shoes} from './filterData';
+import { shoes } from './filterData';
 import { accessory } from './filterData';
 
 
 export const NewProductsComponent = ({ products }) => {
-    console.log('initial array', products);
-    const [initialShowcase, setShowcase] = useState(products.sort(function(a,b){
-        return new Date(b.date) - new Date(a.date) }));
-    
+
+    const [initialShowcase, setShowcase] = useState(products.sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date)
+    }));
 
 
+    //... New products filter function..
     const filter = (filterKey, filterType) => {
-        if(filterKey == 'all') {
+        if (filterKey == 'all') 
+        {
             setShowcase(products);
-        }else if(filterType == 'shoes') {
+        } 
+        else if (filterType == 'shoes') 
+        {
             let filtered = [];
-            products.map(function(item, i) {
-                for(var i = 0; i < shoes.length; i++) {
-                    if(item.category == shoes[i]) {
+            products.map(function (item, i) {
+                for (var i = 0; i < shoes.length; i++) {
+                    if (item.category == shoes[i]) {
                         filtered.push(item);
                     }
                 }
             })
             setShowcase(filtered);
-        }else if(filterType == 'accessory') {
+        } 
+        else if (filterType == 'accessory') 
+        {
             let filtered = [];
-            products.map(function(item, i) {
-                for(var i = 0; i < accessory.length; i++) {
-                    if(item.category == accessory[i]) {
+            products.map(function (item, i) {
+                for (var i = 0; i < accessory.length; i++) {
+                    if (item.category == accessory[i]) {
                         filtered.push(item);
                     }
                 }
@@ -38,12 +43,14 @@ export const NewProductsComponent = ({ products }) => {
             setShowcase(filtered);
         }
     }
-    useEffect(()=> {
-        setShowcase([...products.sort(function(a,b){
-            return new Date(b.date) - new Date(a.date) })]);
-    },[products])
-    
-    console.log('sorted array,', initialShowcase);
+
+    //... Filter latest products..
+    useEffect(() => {
+        setShowcase([...products.sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date)
+        })]);
+    }, [products])
+
     return (
         <div>
             <section class="new_arrivals_area section_padding_100_0 clearfix">
@@ -59,11 +66,11 @@ export const NewProductsComponent = ({ products }) => {
 
                 <div class="karl-projects-menu mb-100">
                     <div class="text-center portfolio-menu">
-                        <button class="btn" onClick={()=>filter('all', 'type')}>ALL</button>
-                        <button class="btn" onClick={()=>filter('Իգական', 'gender')}>WOMAN</button>
-                        <button class="btn" onClick={()=>filter('Արական', 'gender')}>MAN</button>
-                        <button class="btn" onClick={()=>filter('Կոշիկ', 'shoes')}>SHOES</button>
-                        <button class="btn" onClick={()=>filter('Աքսեսուարներ', 'accessory')}>ACCESSORIES</button>
+                        <button class="btn" onClick={() => filter('all', 'type')}>ALL</button>
+                        <button class="btn" onClick={() => filter('Իգական', 'gender')}>WOMAN</button>
+                        <button class="btn" onClick={() => filter('Արական', 'gender')}>MAN</button>
+                        <button class="btn" onClick={() => filter('Կոշիկ', 'shoes')}>SHOES</button>
+                        <button class="btn" onClick={() => filter('Աքսեսուարներ', 'accessory')}>ACCESSORIES</button>
                     </div>
                 </div>
 

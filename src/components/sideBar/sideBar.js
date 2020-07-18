@@ -1,16 +1,19 @@
 import React from 'react';
 
 export const SideBar = () => {
+
+    //... Side bar close function ..
     const sideBarClose = () => {
         const target = document.getElementById('wrapper').style;
-        if(target.left == '300px') {
+        if (target.left == '300px') {
             target.left = '0px';
             document.getElementById('wrapper').className = "";
         }
     }
+    
     return (
         <div class="catagories-side-menu">
-            <div onClick={()=>sideBarClose()} id="sideMenuClose">
+            <div onClick={() => sideBarClose()} id="sideMenuClose">
                 <i class="ti-close"></i>
             </div>
             <div class="nav-side-menu">

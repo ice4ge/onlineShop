@@ -4,16 +4,8 @@ import { useDispatch } from 'react-redux';
 import { CART_ADD } from '../../store/actions/actionNames';
 import { PREVIEW_SET } from '../../store/actions/actionNames';
 
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
 
 import { Carousel } from 'react-bootstrap';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 
 
@@ -21,23 +13,24 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 export const ShopFilteredResult = ({ products }) => {
 
     const dispatch = useDispatch();
+    const [count, setCount] = useState(0);
+    const [start, setStart] = useState(0);
+    const [end, setEnd] = useState(12);
 
-
-
+    //... Add to cart function ..
     const addCart = (product) => {
         dispatch({ type: CART_ADD, payLoad: product });
     }
 
+    //... Turn on preview modal with selected product ..
     const setProductPreview = (preview) => {
         dispatch({ type: PREVIEW_SET, payLoad: preview });
     }
 
-    const [count, setCount] = useState(0);
+    //... Page pagination ..
     useEffect(() => {
         setCount(Math.round(products.length / 12))
     }, [products]);
-    const [start, setStart] = useState(0);
-    const [end, setEnd] = useState(12);
     const paginationPage = (number) => {
         setStart(number * 12 - 12);
         setEnd(number * 12);

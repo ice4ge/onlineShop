@@ -1,14 +1,46 @@
 import React, { useState } from 'react';
-import { filterBytypes } from './filterData';
 
-export const FilterArea = ({filter}) => {
-    const [price, setPrice] = useState(100000);
+import {
+    filterBytypes,
+    typeSubClothingFilters,
+    typeSubShoesFilters,
+    typeSubAccessoryFilters,
+} from './filterData';
+
+export const FilterArea = (props) => {
+
+    const [price, setPrice] = useState(400000);
+    const [typeFilter, setTypeFilter] = useState(typeSubClothingFilters);
+
     const filterByPrice = (e) => {
         filter('price', e);
         setPrice(e);
     }
+    const filter = props.filter;
 
-    
+
+    //... Type filter names switch ..
+    const changeType = (text) => {
+        if (text == 'Clothes') {
+            setTypeFilter(typeSubClothingFilters)
+        } else if (text == 'Shoes') {
+            setTypeFilter(typeSubShoesFilters)
+        } else {
+            setTypeFilter(typeSubAccessoryFilters)
+        }
+    }
+
+    //...Size filter highlight ..
+    const highlighted = document.getElementsByClassName('highlight');
+    const highlight = (count) => {
+        for (var i = 0; i < highlighted.length; i++) {
+            highlighted[i].style.background = 'white';
+            highlighted[i].style.color = 'black';
+        }
+        highlighted[count].style.background = 'red';
+        highlighted[count].style.color = 'white';
+    }
+
     return (
         <div className="col-12 col-md-4 col-lg-3">
             <div className="shop_sidebar_area">
@@ -23,11 +55,25 @@ export const FilterArea = ({filter}) => {
                                         <p>{item.name}</p>
                                         <ul className="sub-menu collapse" id={item.toggleTarget}>
                                             {item.subProperty.map((subs, k) =>
-                                                <li onClick={()=>filter(subs.target, subs.filter)}><p>{subs.text}</p></li>
+                                                <>
+                                                    <li onClick={() => filter(subs.target, subs.filter)}
+                                                        onMouseDown={() => changeType(subs.text)}
+                                                    >
+                                                        <p>{subs.text}</p>
+                                                    </li>
+                                                </>
                                             )}
                                         </ul>
                                     </li>
                                 )}
+                                <li data-toggle="collapse" data-target='#bags2' className="collapsed">
+                                    <p>Type</p>
+                                    <ul className="sub-menu collapse" id='bags2'>
+                                        {typeFilter.map((subs, k) =>
+                                            <li onClick={() => filter(subs.target, subs.type)}><p>{subs.text}</p></li>
+                                        )}
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -37,7 +83,7 @@ export const FilterArea = ({filter}) => {
                     <h6 className="widget-title mb-30">Filter by Price</h6>
                     <div className="widget-desc">
                         <div className="slider-range">
-                            <input type="range" onChange={(event)=>filterByPrice(event.target.value)} className="price_filter"  min="1" max="100000"/>
+                            <input type="range" onChange={(event) => filterByPrice(event.target.value)} className="price_filter" min="1" max="400000" />
                             <div className="range-price">Price: 0 - {price}</div>
                         </div>
                     </div>
@@ -60,13 +106,10 @@ export const FilterArea = ({filter}) => {
                 <div className="widget size mb-50">
                     <h6 className="widget-title mb-30">Filter by Size</h6>
                     <div className="widget-desc">
-                        <ul className="d-flex justify-content-between">
-                            <li><p>XS</p></li>
-                            <li><p>S</p></li>
-                            <li><p>M</p></li>
-                            <li><p>L</p></li>
-                            <li><p>XL</p></li>
-                            <li><p>XXL</p></li>
+                        <ul className="d-flex justify-content-between" id="size_filter">
+                            {props.size && props.size.map((item, i) =>
+                                <li onClick={() => filter('size', item)} onMouseDown={() => highlight(i)}><p id="general" className="highlight">{item}</p></li>
+                            )}
                         </ul>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+//--- Components import --
 import { HeaderComponent } from '../../components/header';
 import { Footer } from '../../components/footer';
 import { BillingInputComponent } from '../../components/billingInput';
@@ -10,6 +11,7 @@ export const Checkout = () => {
     const style = {
         left: '0px',
     }
+    
     return (
         <div>
             <SideBar />

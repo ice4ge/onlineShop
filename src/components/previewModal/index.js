@@ -1,21 +1,21 @@
 import React from 'react';
 import { CART_ADD } from '../../store/actions/actionNames';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export const PreviewModal = ({PreviewState}) => {
-    console.log("preview", PreviewState);
+export const PreviewModal = ({ PreviewState }) => {
     const dispatch = useDispatch();
 
+    //... Add to cart function ..
     const cartAdd = () => {
-        dispatch({type: CART_ADD, payLoad: PreviewState});
+        dispatch({ type: CART_ADD, payLoad: PreviewState });
     }
     return (
         <div className="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div className="modal-content">
                     <button type="button" className="close btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
 
                     <div className="modal-body">
                         <div className="quickview_body">
@@ -23,7 +23,7 @@ export const PreviewModal = ({PreviewState}) => {
                                 <div className="row">
                                     <div className="col-12 col-lg-5">
                                         <div className="quickview_pro_img">
-                                            <img src={PreviewState.img} alt=""/>
+                                            <img src={PreviewState.img} alt="" />
                                         </div>
                                     </div>
                                     <div className="col-12 col-lg-7">
@@ -36,7 +36,7 @@ export const PreviewModal = ({PreviewState}) => {
                                                 <i className="fa fa-star" aria-hidden="true"></i>
                                                 <i className="fa fa-star" aria-hidden="true"></i>
                                             </div>
-                                            <h5 className="price">${PreviewState.price} <span>${PreviewState.price + 10}</span></h5>
+                                            <h5 className="price">${PreviewState.price}</h5>
                                             <p>{PreviewState.text}</p>
                                             <a href="#">View Full Product Details</a>
                                         </div>
@@ -44,11 +44,11 @@ export const PreviewModal = ({PreviewState}) => {
                                             <div className="quantity">
                                                 <span className="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i className="fa fa-minus" aria-hidden="true"></i></span>
 
-                                                <input type="number" className="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1"/>
+                                                <input type="number" className="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1" />
 
                                                 <span className="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i className="fa fa-plus" aria-hidden="true"></i></span>
                                             </div>
-                                            <p onClick={()=>cartAdd()} className="cart-submit">Add to cart</p>
+                                            <p onClick={() => cartAdd()} className="cart-submit">Add to cart</p>
                                             <div className="modal_pro_wishlist">
                                                 <a href="wishlist.html" target="_blank"><i className="ti-heart"></i></a>
                                             </div>

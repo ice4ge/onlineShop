@@ -7,6 +7,7 @@ import firebase from './components/firebase';
 import { useDispatch } from 'react-redux';
 import { Switch, Route } from "react-router-dom";
 import { TOTAL_PRODUCTS } from './store/actions/actionNames';
+import { round } from 'lodash';
 
 export default function App() {
   const store = firebase.firestore();
@@ -21,7 +22,7 @@ export default function App() {
           const productItems = {
             name: itemObject.productName,
             img: itemObject.images,
-            price: itemObject.productPrice,
+            price: round(itemObject.productPrice - (itemObject.productPrice / 100)*itemObject.sale),
             description: itemObject.description,
             gender: itemObject.gender,
             brand: 'Gucci',
@@ -33,7 +34,8 @@ export default function App() {
             type: itemObject.type,
             date: itemObject.date
           };
-          realData.push(productItems);
+          realData.push(productItems,);
+          console.log(itemObject.productPrice, productItems.price,itemObject.sale);
         });
         dispatch({ type: TOTAL_PRODUCTS, payLoad: realData });
       })

@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const CartProducts = ({ productList }) => {
-    console.log('cart', productList);
     return (
 
         <tr>

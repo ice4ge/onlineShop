@@ -1,11 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { BagState } from './bagMenu';
-
 import { useSelector } from 'react-redux';
 
+import { BagState } from './bagMenu';
+
 export const HeadSection = () => {
+
     const dropDown = useRef();
+    const [priceCount, setPrice] = useState(0);
+    const bagProducts = useSelector(state => state.CartReducer);
+
+    //--- Drop down menu style--
+    const DropStyle = {
+        display: 'none'
+    }
+
+    //... Menu drop down function ..
     const openDrop = () => {
         const target = dropDown.current.style;
         if (target.display == 'none') {
@@ -14,24 +24,21 @@ export const HeadSection = () => {
             target.display = 'none';
         }
     }
-    const bagProducts = useSelector(state => state.CartReducer);
-    const [priceCount, setPrice] = useState(0);
 
+    //... Count total price in cart..
     useEffect(() => {
         for (var i = 0; i < bagProducts.length; i++) {
             setPrice(priceCount + bagProducts[i].price);
         }
     }, [bagProducts]);
 
-    const DropStyle = {
-        display: 'none'
-    }
+    //...Side bar toggle function..
     const sideBarToggle = () => {
         const target = document.getElementById('wrapper').style;
-        if(target.left == '0px') {
+        if (target.left == '0px') {
             target.left = '300px';
             document.getElementById('wrapper').className = "karl-side-menu-open";
-        }else {
+        } else {
             target.left = '0px';
             document.getElementById('wrapper').className = "";
         }

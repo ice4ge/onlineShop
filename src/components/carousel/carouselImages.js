@@ -1,5 +1,4 @@
 import React from 'react';
-// import './active';
 
 export const ImageCarousel1 = () => {
 

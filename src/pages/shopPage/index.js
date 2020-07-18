@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { GET_FILTER } from '../../store/actions/actionNames';
+import { sizeChart } from './size';
 
+//--- Components import --
 import { HeaderComponent } from '../../components/header';
 import { Footer } from '../../components/footer';
 import { FilterArea } from '../../components/filterArea';
@@ -7,8 +11,6 @@ import { ShopFilteredResult } from '../../components/shopFilterResult/mainWindow
 import { SideBar } from '../../components/sideBar';
 import { PreviewModal } from '../../components/previewModal';
 import firebase from '../../components/firebase';
-import { useSelector, useDispatch } from 'react-redux';
-import{ GET_FILTER } from '../../store/actions/actionNames';
 
 
 export const ShopPage = () => {
@@ -17,15 +19,23 @@ export const ShopPage = () => {
     }
     const products = useSelector(state => state.ProductsService);
     const PreviewState = useSelector(state => state.ProductPreview);
+
     const [showCase, setShowcase] = useState(products);
-    const store = firebase.firestore();
+    const [virtualSets, setVirtualSets] = useState(products);
+    const [gender, setGender] = useState();
+    const [category, setCategory] = useState();
+    const [type, setType] = useState();
+    const [size, setSize] = useState([]);
     const dispatch = useDispatch();
-    var filter = require('lodash.filter');
+
+    const store = firebase.firestore();
     const filterArray = (filterKey, filterType) => {
-        if (filterKey == 'price') {
-            setShowcase(products.filter(item => item[filterKey] <= filterType));
-        } else if (filterKey == 'brand') {
-        
+        if (filterKey == 'price') 
+        {
+            setShowcase(virtualSets.filter(item => item[filterKey] <= filterType));
+        } 
+        else if (filterKey == 'brand') 
+        {
             const dataRef = store.collection("AllShops").doc(filterType).collection('products');
             let realData = [];
             dataRef.get()
@@ -52,21 +62,55 @@ export const ShopPage = () => {
                     });
                     dispatch({ type: GET_FILTER, payLoad: realData });
                 })
-                setShowcase(products);
-        } else if(filterKey == 'gender'){
-            setShowcase(products.filter(item => item.gender == filterType))
-        }else if(filterKey == 'category') {
-            console.log(filterKey, filterType)
-            let filtered = [];
-            
-            console.log(filtered);
+            setShowcase(products);
+            setVirtualSets(products);
+        }
+        else if (filterKey == 'gender') 
+        {
+            setShowcase(products.filter(item => item.gender == filterType));
+            setVirtualSets(products.filter(item => item.gender == filterType));
+            setGender(filterType);
+        } 
+        else if (filterKey == 'category') 
+        {
+            setShowcase(products.filter(item => item.category == filterType))
+            setVirtualSets(products.filter(item => item.category == filterType));
+            setCategory(filterType);
+        } 
+        else if (filterKey == 'type') 
+        {
+            setShowcase(products.filter(item => item.type == filterType))
+            setVirtualSets(products.filter(item => item.type == filterType));
+            setType(filterType);
+        } 
+        else if (filterKey == 'size') 
+        {
+            let result = [];
+            virtualSets.map(function (item, i) {
+                let flag = 0;
+                for (var i = 0; i < item.size.length; i++) {
+                    if (item.size[i] == filterType) {
+                        flag++;
+                    }
+                }
+                if (flag > 0) {
+                    result.push(item);
+                    flag = 0;
+                }
+            })
+            console.log(filterType);
+            setShowcase(result);
         }
     }
-    useEffect(()=> {
+    
+    useEffect(() => {
         setShowcase(products)
-    },[products])
-
-
+    }, [products])
+    
+    useEffect(() => {
+        setSize(sizeChart(gender, category, type))
+    }, [gender, category, type])
+    
     return (
         <div>
             <SideBar />
@@ -75,7 +119,7 @@ export const ShopPage = () => {
                 <section className="shop_grid_area section_padding_100">
                     <div className="container">
                         <div className="row">
-                            <FilterArea filter={filterArray} />
+                            <FilterArea size={size} filter={filterArray} />
                             <ShopFilteredResult products={showCase} />
                         </div>
                     </div>

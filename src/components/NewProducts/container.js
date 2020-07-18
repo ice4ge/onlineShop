@@ -42,6 +42,10 @@ export const NewProductsComponent = ({ products }) => {
             })
             setShowcase(filtered);
         }
+        else if(filterType == 'gender')
+        {
+            setShowcase(products.filter(item => item.gender == filterKey));
+        }
     }
 
     //... Filter latest products..

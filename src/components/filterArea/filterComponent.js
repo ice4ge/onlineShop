@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     filterBytypes,
@@ -6,14 +6,16 @@ import {
     typeSubShoesFilters,
     typeSubAccessoryFilters,
 } from './filterData';
+import { size } from 'lodash';
 
 export const FilterArea = (props) => {
 
     const [price, setPrice] = useState(400000);
     const [typeFilter, setTypeFilter] = useState(typeSubClothingFilters);
+    const [sizeFilter, setSizeFilter] = useState([])
 
     const filterByPrice = (e) => {
-        filter('price', e);
+        props.filter('price', e);
         setPrice(e);
     }
     const filter = props.filter;
@@ -30,16 +32,56 @@ export const FilterArea = (props) => {
         }
     }
 
-    //...Size filter highlight ..
-    const highlighted = document.getElementsByClassName('highlight');
-    const highlight = (count) => {
-        for (var i = 0; i < highlighted.length; i++) {
-            highlighted[i].style.background = 'white';
-            highlighted[i].style.color = 'black';
+    //... Highlight selected filter ..
+    const enableFilter = (list, sublist) => {
+        for (var i = 0; i < filterBytypes[list].subProperty.length; i++) {
+            if (i != sublist) {
+                filterBytypes[list].subProperty[i].select = false;
+            }
         }
-        highlighted[count].style.background = 'red';
-        highlighted[count].style.color = 'white';
+        if (filterBytypes[list].subProperty[sublist].select == false) {
+            filterBytypes[list].subProperty[sublist].select = true;
+        }
+        else {
+            filterBytypes[list].subProperty[sublist].select = false;
+        }
+        props.filterProducts(filterBytypes, typeFilter);
     }
+
+    //... Highlight selected type filter .. 
+    const typeFilterEnable = (number) => {
+        for (var i = 0; i < typeFilter.length; i++) {
+            if (i != number) {
+                typeFilter[i].select = false;
+            }
+            if (typeFilter[number].select == false) {
+                typeFilter[number].select = true;
+            }
+            else {
+                typeFilter[number].select = false;
+            }
+        }
+        props.filterProducts(filterBytypes, typeFilter);
+    }
+
+    //...Size filter highlight ..
+    const highlight = (count) => {
+        let filterSize = sizeFilter;
+        for(var i = 0; i < filterSize.length; i++) {
+            if(i != count) {
+                filterSize[i].select = false;
+            }
+            else if(filterSize[i].select == false) {
+                filterSize[i].select = true;
+            }
+            else if(filterSize[i].select == true) {
+                filterSize[i].select = false
+            }
+        }
+        console.log(filterSize)
+        setSizeFilter(filterSize);
+    }
+    console.log('state size', sizeFilter);
 
     return (
         <div className="col-12 col-md-4 col-lg-3">
@@ -58,8 +100,9 @@ export const FilterArea = (props) => {
                                                 <>
                                                     <li onClick={() => filter(subs.target, subs.filter)}
                                                         onMouseDown={() => changeType(subs.text)}
+                                                        onMouseUp={() => enableFilter(i, k)}
                                                     >
-                                                        <p>{subs.text}</p>
+                                                        <p className={subs.select ? 'selected' : 'disabled'}>{subs.text}</p>
                                                     </li>
                                                 </>
                                             )}
@@ -70,7 +113,11 @@ export const FilterArea = (props) => {
                                     <p>Type</p>
                                     <ul className="sub-menu collapse" id='bags2'>
                                         {typeFilter.map((subs, k) =>
-                                            <li onClick={() => filter(subs.target, subs.type)}><p>{subs.text}</p></li>
+                                            <li
+                                                onClick={() => filter(subs.target, subs.type)}
+                                                onMouseDown={() => typeFilterEnable(k)}>
+                                                <p className={subs.select ? 'selected' : 'disabled'}>{subs.text}</p>
+                                            </li>
                                         )}
                                     </ul>
                                 </li>
@@ -83,7 +130,7 @@ export const FilterArea = (props) => {
                     <h6 className="widget-title mb-30">Filter by Price</h6>
                     <div className="widget-desc">
                         <div className="slider-range">
-                            <input type="range" onChange={(event) => filterByPrice(event.target.value)} className="price_filter" min="1" max="400000" />
+                            <input type="range" onChange={(event) => filterByPrice(event.target.value)} className="price_filter" min="1" max="400000" defaultValue="400000" />
                             <div className="range-price">Price: 0 - {price}</div>
                         </div>
                     </div>
@@ -106,9 +153,13 @@ export const FilterArea = (props) => {
                 <div className="widget size mb-50">
                     <h6 className="widget-title mb-30">Filter by Size</h6>
                     <div className="widget-desc">
-                        <ul className="d-flex justify-content-between" id="size_filter">
-                            {props.size && props.size.map((item, i) =>
-                                <li onClick={() => filter('size', item)} onMouseDown={() => highlight(i)}><p id="general" className="highlight">{item}</p></li>
+                        <ul className="d-flex justify-content-between" id="style-4">
+                            {sizeFilter && sizeFilter.map((item, i) =>
+                                <li 
+                                onClick={() => filter('size', item.size)} 
+                                onMouseDown={() => highlight(i)}>
+                                    <p id="general" className={item.select ? 'selected_size' : 'disabled_size'}>{item.size}</p>
+                                </li>
                             )}
                         </ul>
                     </div>

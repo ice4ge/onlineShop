@@ -3,9 +3,29 @@ export function sizeChart(genderi, categoryi, typei){
     if( categoryi == "Կոշիկ") 
     {
         if (genderi == "Տղամարդու"){
-            return ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46"]
+            return [ 
+                {size: "36", select: false}, 
+                {size: "37", select: false}, 
+                {size: "38", select: false}, 
+                {size: "39", select: false}, 
+                {size: "40", select: false}, 
+                {size: "41", select: false}, 
+                {size: "42", select: false}, 
+                {size: "43", select: false}, 
+                {size: "44", select: false}, 
+                {size: "45", select: false},
+                {size: "46", select: false},
+            ]
         } else {
-            return ["35", "36", "37", "38", "39", "40", "41"]
+            return [
+                {size: "35", select: false}, 
+                {size: "36", select: false}, 
+                {size: "37", select: false}, 
+                {size: "38", select: false}, 
+                {size: "39", select: false}, 
+                {size: "40", select: false}, 
+                {size: "41", select: false},
+            ]
         }
     } 
     else 
@@ -14,14 +34,55 @@ export function sizeChart(genderi, categoryi, typei){
         if (typei == "Ջինս" || typei == "Տաբատներ" || typei == "Շորտեր") 
         {
             if (genderi == "Արական") {
-                return ["28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44"]
+                return [
+                    {size: "28", select: false},
+                    {size: "29", select: false},
+                    {size: "30", select: false},
+                    {size: "31", select: false},
+                    {size: "32", select: false},
+                    {size: "33", select: false},
+                    {size: "34", select: false},
+                    {size: "35", select: false},
+                    {size: "36", select: false},
+                    {size: "37", select: false},
+                    {size: "38", select: false},
+                    {size: "39", select: false},
+                    {size: "40", select: false},
+                    {size: "41", select: false},
+                    {size: "42", select: false},
+                    {size: "43", select: false},
+                    {size: "44", select: false},
+                ]
             } else {
-                return ["31","32","33", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54"]
+                return [
+                    {size: "31", select: false},
+                    {size: "32", select: false},
+                    {size: "33", select: false}, 
+                    {size: "34", select: false}, 
+                    {size: "36", select: false}, 
+                    {size: "38", select: false}, 
+                    {size: "40", select: false}, 
+                    {size: "42", select: false}, 
+                    {size: "44", select: false}, 
+                    {size: "46", select: false}, 
+                    {size: "48", select: false}, 
+                    {size: "50", select: false}, 
+                    {size: "52", select: false}, 
+                    {size: "54", select: false},
+                ]
             }
         } else if (typei == "Ներքնազգեստ") {
             return [String]()
         } else {
-            return ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+            return [
+                {size: "XS", select: false},
+                {size: "S", select: false },
+                {size: "M", select: false },
+                {size: "L", select: false },
+                {size: "XL", select: false },
+                {size: "XXL", select: false },
+                {size: "XXXL", select: false},
+            ];
         }
     }
 }

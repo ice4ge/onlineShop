@@ -1603,7 +1603,7 @@ img {
     height: 5px;
 }
 #size_filter {
-    overflow-x: scroll;
+    
 }
 .widget.price .range-price {
     font-size: 14px;
@@ -1778,7 +1778,12 @@ img {
 .single_product_desc .price {
     margin-bottom: 15px;
 }
-
+.selected {
+    color: red !important;
+}
+.disabled {
+    color: black !important;
+}
 .single_product_desc .available {
     margin-bottom: 15px;
     font-size: 12px;
@@ -1821,6 +1826,11 @@ img {
     text-align: center;
     line-height: 33px;
 }
+
+.widget.size .widget-desc ul {
+    overflow-x: scroll;
+}
+
 .widget.size .widget-desc p:focus {
     border: 2px solid #ff084e;
     background-color: #ff084e;
@@ -1836,6 +1846,30 @@ img {
 .highlight:focus {
     border: 2px solid #ff084e;
     background-color: #ff084e;
+}
+.selected_size {
+    background-color: red;
+    color: white;
+}
+.disabled_size {
+    background-color: white;
+    color: black;
+}
+#style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar
+{
+	width: 2px;
+	background-color: #F5F5F5;
+}
+
+#style-4::-webkit-scrollbar-thumb
+{
+	background-color: greenyellow;
 }
 
 .single_product_desc .widget.size {

@@ -22,9 +22,9 @@ export const ShopPage = () => {
 
     const [showCase, setShowcase] = useState(products);
     const [virtualSets, setVirtualSets] = useState(products);
-    const [gender, setGender] = useState();
-    const [category, setCategory] = useState();
-    const [type, setType] = useState();
+    const [gender, setGender] = useState('');
+    const [category, setCategory] = useState('');
+    const [type, setType] = useState('');
     const [size, setSize] = useState([]);
     const dispatch = useDispatch();
 
@@ -67,50 +67,54 @@ export const ShopPage = () => {
         }
         else if (filterKey == 'gender') 
         {
-            setShowcase(products.filter(item => item.gender == filterType));
-            setVirtualSets(products.filter(item => item.gender == filterType));
             setGender(filterType);
         } 
         else if (filterKey == 'category') 
         {
-            setShowcase(products.filter(item => item.category == filterType))
-            setVirtualSets(products.filter(item => item.category == filterType));
             setCategory(filterType);
         } 
         else if (filterKey == 'type') 
         {
-            setShowcase(products.filter(item => item.type == filterType))
-            setVirtualSets(products.filter(item => item.type == filterType));
             setType(filterType);
         } 
-        else if (filterKey == 'size') 
-        {
-            let result = [];
-            virtualSets.map(function (item, i) {
-                let flag = 0;
-                for (var i = 0; i < item.size.length; i++) {
-                    if (item.size[i] == filterType) {
-                        flag++;
-                    }
-                }
-                if (flag > 0) {
-                    result.push(item);
-                    flag = 0;
-                }
-            })
-            console.log(filterType);
-            setShowcase(result);
+        else if(filterKey == 'price') {
+            setShowcase(virtualSets.filter(item => item.price == filterType));
         }
     }
     
     useEffect(() => {
-        setShowcase(products)
+        setShowcase(products);
+        setVirtualSets(products);
     }, [products])
     
     useEffect(() => {
-        setSize(sizeChart(gender, category, type))
-    }, [gender, category, type])
-    
+        setSize(sizeChart(gender, category, type));
+    }, [gender, category, type]);  
+
+
+    const filterProducts = (range, type) => {
+        console.log(range, type)
+
+        let filterResult = products;
+        for(var i = 0; i < range[0].subProperty.length; i++) {
+            if(range[0].subProperty[i].select == true) {
+                filterResult = filterResult.filter(item => item.gender == range[0].subProperty[i].filter);
+            }
+        }
+        for(var i = 0; i < range[2].subProperty.length; i++) {
+            if(range[2].subProperty[i].select == true) {
+                filterResult = filterResult.filter(item => item.category == range[2].subProperty[i].filter);
+            }
+        }
+
+        for(var i = 0; i < type.length; i++) {
+            if(type[i].select == true) {
+                filterResult = filterResult.filter(item => item.type == type[i].type);
+            }
+        }
+        setShowcase(filterResult); 
+        setVirtualSets(filterResult); 
+    }
     return (
         <div>
             <SideBar />
@@ -119,7 +123,7 @@ export const ShopPage = () => {
                 <section className="shop_grid_area section_padding_100">
                     <div className="container">
                         <div className="row">
-                            <FilterArea size={size} filter={filterArray} />
+                            <FilterArea filterProducts={filterProducts} size={size} filter={filterArray} />
                             <ShopFilteredResult products={showCase} />
                         </div>
                     </div>

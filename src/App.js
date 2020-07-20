@@ -4,7 +4,7 @@ import { ShopPage } from './pages/shopPage';
 import { CartPage } from './pages/cartPage';
 import { Checkout } from './pages/checkout';
 import firebase from './components/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from "react-router-dom";
 import { TOTAL_PRODUCTS } from './store/actions/actionNames';
 
@@ -12,7 +12,7 @@ export default function App() {
   const store = firebase.firestore();
   const dispatch = useDispatch();
 
-  let product = [];
+
   useEffect(() => {
     store.collection('AllShops').get().then((snapshot) => {
       let allProducts = []
@@ -39,13 +39,9 @@ export default function App() {
                   date: itemObject.date
                 };
                 allProducts.push(productItems);
-                
               })
             })
-
       })
-      product = [...allProducts];
-      console.log("first load products",product);
       dispatch({ type: TOTAL_PRODUCTS, payLoad: allProducts });
     })
   },[])

@@ -42,40 +42,15 @@ export const ShopPage = () => {
             setShowcase(virtualSets.filter(item => item[filterKey] <= filterType));
         }
         else if (filterKey == 'brand') {
-            // const brandProducts = filterType[1].subProperty;
-            // console.log(brandProducts);
-            // let dispatchFlag = 0;
-            // for (var k = 0; k < brandProducts.length; k++) {
-            //     if (brandProducts[k].select) {
-            //         const dataRef = store.collection("AllShops").doc(brandProducts[k].target).collection('products');
-            //         dataRef.get()
-            //             .then(Response => {
-            //                 let allProducts = []
-            //                 Response.forEach(document => {
-            //                     const itemObject = document.data();
-            //                     const productItems = {
-            //                         name: itemObject.productName,
-            //                         img: itemObject.images,
-            //                         price: Math.round(itemObject.productPrice - (itemObject.productPrice / 100) * itemObject.sale),
-            //                         description: itemObject.description,
-            //                         gender: itemObject.gender,
-            //                         brand: brandProducts[k].text,
-            //                         category: itemObject.category,
-            //                         size: itemObject.productSize,
-            //                         color: itemObject.color,
-            //                         ar: itemObject.ar,
-            //                         sale: itemObject.sale,
-            //                         type: itemObject.type,
-            //                         date: itemObject.date
-            //                     };
-            //                     allProducts.push(productItems);
-
-            //                 })
-            //                 console.log('brand filtered', allProducts);
-            //             })
-            //     }
-
-            // }
+            console.log(filterType[1]);
+            filterType[1].subProperty.map(function (brands) {
+                if(brands.select) {
+                    setShowcase(products.filter(item => item.brand == brands.target))
+                }
+                else {
+                    setShowcase(products);
+                }
+            })
         }
         else if (filterKey == 'gender') {
             setGender(filterType);
@@ -122,21 +97,30 @@ export const ShopPage = () => {
 
 
     const filterProducts = (range, type) => {
-
         let filterResult = products;
+        console.log(range[1].subProperty);
+        for(var i = 0; i < range[1].subProperty.length; i++) {
+            if(range[1].subProperty[i].select === true) {
+                filterResult = filterResult.filter(item => item.brand == range[1].subProperty[i].filter);
+            } 
+            else {
+                filterResult = products;
+            }
+        }
+
         for (var i = 0; i < range[0].subProperty.length; i++) {
-            if (range[0].subProperty[i].select == true) {
+            if (range[0].subProperty[i].select === true) {
                 filterResult = filterResult.filter(item => item.gender == range[0].subProperty[i].filter);
             }
         }
         for (var i = 0; i < range[2].subProperty.length; i++) {
-            if (range[2].subProperty[i].select == true) {
+            if (range[2].subProperty[i].select === true) {
                 filterResult = filterResult.filter(item => item.category == range[2].subProperty[i].filter);
             }
         }
 
         for (var i = 0; i < type.length; i++) {
-            if (type[i].select == true) {
+            if (type[i].select === true) {
                 filterResult = filterResult.filter(item => item.type == type[i].type);
             }
         }

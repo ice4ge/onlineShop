@@ -30,6 +30,8 @@ export const FilterArea = (props) => {
         }
     }
 
+
+
     //... Highlight selected filter ..
     const enableFilter = (list, sublist) => {
         for (var i = 0; i < filterBytypes[list].subProperty.length; i++) {
@@ -100,6 +102,7 @@ export const FilterArea = (props) => {
         props.setSizeProps(productsFilteredBySize);
         props.filter('size', productsFilteredBySize);
     }
+    console.log('true or false', filterBytypes)
     return (
         <div className="col-12 col-md-4 col-lg-3">
             <div className="shop_sidebar_area">
@@ -115,7 +118,7 @@ export const FilterArea = (props) => {
                                         <ul className="sub-menu collapse" id={item.toggleTarget}>
                                             {item.subProperty.map((subs, k) =>
                                                 <>
-                                                    <li onClick={subs.target != 'brand' ? () => filter(subs.target, subs.filter) : () => filter(subs.target, filterBytypes)}
+                                                    <li onClick={() => filter(subs.target, filterBytypes)}
                                                         onMouseDown={() => changeType(subs.text)}
                                                         onMouseUp={() => enableFilter(i, k)}
                                                     >

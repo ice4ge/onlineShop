@@ -11,6 +11,7 @@ import { Carousel } from 'react-bootstrap';
 
 
 export const ShopFilteredResult = ({ products }) => {
+    console.log('shop products recieve', products)
     const dispatch = useDispatch();
     const [count, setCount] = useState(0);
     const [start, setStart] = useState(0);

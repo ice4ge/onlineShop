@@ -41,17 +41,6 @@ export const ShopPage = () => {
         if (filterKey == 'price') {
             setShowcase(virtualSets.filter(item => item[filterKey] <= filterType));
         }
-        else if (filterKey == 'brand') {
-            console.log(filterType[1]);
-            filterType[1].subProperty.map(function (brands) {
-                if(brands.select) {
-                    setShowcase(products.filter(item => item.brand == brands.target))
-                }
-                else {
-                    setShowcase(products);
-                }
-            })
-        }
         else if (filterKey == 'gender') {
             setGender(filterType);
         }
@@ -98,16 +87,11 @@ export const ShopPage = () => {
 
     const filterProducts = (range, type) => {
         let filterResult = products;
-        console.log(range[1].subProperty);
         for(var i = 0; i < range[1].subProperty.length; i++) {
             if(range[1].subProperty[i].select === true) {
                 filterResult = filterResult.filter(item => item.brand == range[1].subProperty[i].filter);
             } 
-            else {
-                filterResult = products;
-            }
         }
-
         for (var i = 0; i < range[0].subProperty.length; i++) {
             if (range[0].subProperty[i].select === true) {
                 filterResult = filterResult.filter(item => item.gender == range[0].subProperty[i].filter);
@@ -127,6 +111,7 @@ export const ShopPage = () => {
         setShowcase(filterResult);
         setVirtualSets(filterResult);
     }
+    console.log('showcase changing', showCase)
     return (
         <div>
             <SideBar />

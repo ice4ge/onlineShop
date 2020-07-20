@@ -16,14 +16,13 @@ export const ProductsList = (props) => {
     const addCart = () => {
         dispatch({ type: CART_ADD, payLoad: props.Obj });
     }
-    console.log('products showcase window', props)
     return (
         <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
             <div className="product_item">
                 <div class="product-img">
                     <Carousel controls={false}>
                         {props.img.map((item, i) =>
-                            <Carousel.Item>
+                            <Carousel.Item key={i}>
                                 <div className="new_product_item">
                                     <img className="carouse_images" src={item} alt="" />
                                     <div class="product-quicview">

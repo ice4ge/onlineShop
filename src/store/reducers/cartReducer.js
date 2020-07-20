@@ -1,4 +1,3 @@
-import React from 'react';
 import * as actions from '../actions/actionNames';
 
 export const CartReducer = (state = [], action) => {

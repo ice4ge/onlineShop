@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import {
     filterBytypes,
@@ -6,13 +6,11 @@ import {
     typeSubShoesFilters,
     typeSubAccessoryFilters,
 } from './filterData';
-import { size } from 'lodash';
 
 export const FilterArea = (props) => {
 
     const [price, setPrice] = useState(400000);
     const [typeFilter, setTypeFilter] = useState(typeSubClothingFilters);
-    const [sizeFilter, setSizeFilter] = useState([])
 
     const filterByPrice = (e) => {
         props.filter('price', e);
@@ -23,9 +21,9 @@ export const FilterArea = (props) => {
 
     //... Type filter names switch ..
     const changeType = (text) => {
-        if (text == 'Clothes') {
+        if (text === 'Clothes') {
             setTypeFilter(typeSubClothingFilters)
-        } else if (text == 'Shoes') {
+        } else if (text === 'Shoes') {
             setTypeFilter(typeSubShoesFilters)
         } else {
             setTypeFilter(typeSubAccessoryFilters)
@@ -63,26 +61,45 @@ export const FilterArea = (props) => {
         }
         props.filterProducts(filterBytypes, typeFilter);
     }
+    const sizeStyle = {
+        background: 'white',
+        color: 'black',
+    }
 
     //...Size filter highlight ..
+    const highlighted = document.getElementsByClassName('highlight');
     const highlight = (count) => {
-        let filterSize = sizeFilter;
-        for(var i = 0; i < filterSize.length; i++) {
+        for (var i = 0; i < highlighted.length; i++) {
             if(i != count) {
-                filterSize[i].select = false;
-            }
-            else if(filterSize[i].select == false) {
-                filterSize[i].select = true;
-            }
-            else if(filterSize[i].select == true) {
-                filterSize[i].select = false
+                highlighted[i].style.background = 'white';
+                highlighted[i].style.color = 'black';  
             }
         }
-        console.log(filterSize)
-        setSizeFilter(filterSize);
+        if(highlighted[count].style.background == 'white') {
+            highlighted[count].style.background = 'red';
+            highlighted[count].style.color = 'white';
+        }else {
+            highlighted[count].style.background = 'white';
+            highlighted[count].style.color = 'black';
+        }
+        const productsFilteredBySize = props.size;
+        for (var i = 0; i < productsFilteredBySize.length; i++) {
+            
+            if (i != count) {
+                productsFilteredBySize[i].select = false;
+            }else {
+                if (productsFilteredBySize[count].select == false) {
+                    productsFilteredBySize[count].select = true;
+                }
+                else {
+                    productsFilteredBySize[count].select = false;
+                }
+            }
+           
+        }
+        props.setSizeProps(productsFilteredBySize);
+        props.filter('size', productsFilteredBySize);
     }
-    console.log('state size', sizeFilter);
-
     return (
         <div className="col-12 col-md-4 col-lg-3">
             <div className="shop_sidebar_area">
@@ -98,7 +115,7 @@ export const FilterArea = (props) => {
                                         <ul className="sub-menu collapse" id={item.toggleTarget}>
                                             {item.subProperty.map((subs, k) =>
                                                 <>
-                                                    <li onClick={() => filter(subs.target, subs.filter)}
+                                                    <li onClick={subs.target != 'brand' ? () => filter(subs.target, subs.filter) : () => filter(subs.target, filterBytypes)}
                                                         onMouseDown={() => changeType(subs.text)}
                                                         onMouseUp={() => enableFilter(i, k)}
                                                     >
@@ -154,11 +171,10 @@ export const FilterArea = (props) => {
                     <h6 className="widget-title mb-30">Filter by Size</h6>
                     <div className="widget-desc">
                         <ul className="d-flex justify-content-between" id="style-4">
-                            {sizeFilter && sizeFilter.map((item, i) =>
+                            {props.size && props.size.map((item, i) =>
                                 <li 
-                                onClick={() => filter('size', item.size)} 
                                 onMouseDown={() => highlight(i)}>
-                                    <p id="general" className={item.select ? 'selected_size' : 'disabled_size'}>{item.size}</p>
+                                    <p id="general" style={sizeStyle} className='highlight'>{item.size}</p>
                                 </li>
                             )}
                         </ul>

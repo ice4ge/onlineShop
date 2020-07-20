@@ -11,7 +11,6 @@ import { Carousel } from 'react-bootstrap';
 
 
 export const ShopFilteredResult = ({ products }) => {
-
     const dispatch = useDispatch();
     const [count, setCount] = useState(0);
     const [start, setStart] = useState(0);
@@ -35,8 +34,6 @@ export const ShopFilteredResult = ({ products }) => {
         setStart(number * 12 - 12);
         setEnd(number * 12);
     }
-
-    console.log('filter', products);
     return (
         <div className="col-12 col-md-8 col-lg-9">
             <div className="shop_grid_product_area">

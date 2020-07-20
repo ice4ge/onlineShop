@@ -44,6 +44,31 @@ export const filterBytypes = [
                 target: 'brand',
                 filter: 'Puma',
                 select: false,
+            },{
+                text: 'Armani Exchange',
+                target: 'brand',
+                filter: 'Armani Exchange',
+                select: false,
+            },{
+                text: 'Celio',
+                target: 'brand',
+                filter: 'Celio',
+                select: false,
+            },{
+                text: 'Pull&Bear',
+                target: 'brand',
+                filter: 'Pull&Bear',
+                select: false,
+            },{
+                text: 'Tommy Hilfiger',
+                target: 'brand',
+                filter: 'Tommy Hilfiger',
+                select: false,
+            },{
+                text: 'U.S. POLO ASSN',
+                target: 'brand',
+                filter: 'U.S. POLO ASSN',
+                select: false,
             }
         ]
     }, {

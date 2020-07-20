@@ -18,7 +18,7 @@ export const HeadSection = () => {
     //... Menu drop down function ..
     const openDrop = () => {
         const target = dropDown.current.style;
-        if (target.display == 'none') {
+        if (target.display === 'none') {
             target.display = 'block';
         } else {
             target.display = 'none';
@@ -35,7 +35,7 @@ export const HeadSection = () => {
     //...Side bar toggle function..
     const sideBarToggle = () => {
         const target = document.getElementById('wrapper').style;
-        if (target.left == '0px') {
+        if (target.left === '0px') {
             target.left = '300px';
             document.getElementById('wrapper').className = "karl-side-menu-open";
         } else {

@@ -14,11 +14,11 @@ export const NewProductsComponent = ({ products }) => {
 
     //... New products filter function..
     const filter = (filterKey, filterType) => {
-        if (filterKey == 'all') 
+        if (filterKey === 'all') 
         {
             setShowcase(products);
         } 
-        else if (filterType == 'shoes') 
+        else if (filterType === 'shoes') 
         {
             let filtered = [];
             products.map(function (item, i) {
@@ -30,19 +30,19 @@ export const NewProductsComponent = ({ products }) => {
             })
             setShowcase(filtered);
         } 
-        else if (filterType == 'accessory') 
+        else if (filterType === 'accessory') 
         {
             let filtered = [];
             products.map(function (item, i) {
-                for (var i = 0; i < accessory.length; i++) {
-                    if (item.category == accessory[i]) {
+                for (var j = 0; j < accessory.length; j++) {
+                    if (item.category == accessory[j]) {
                         filtered.push(item);
                     }
                 }
             })
             setShowcase(filtered);
         }
-        else if(filterType == 'gender')
+        else if(filterType === 'gender')
         {
             setShowcase(products.filter(item => item.gender == filterKey));
         }
@@ -81,7 +81,7 @@ export const NewProductsComponent = ({ products }) => {
                 <div class="container">
                     <div class="row karl-new-arrivals">
                         {initialShowcase.slice(0, 6).map((item, i) =>
-                            <ProductsList gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
+                            <ProductsList key={i} gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
                         )}
                     </div>
                 </div>

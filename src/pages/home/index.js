@@ -33,7 +33,7 @@ export const HomePage = () => {
     const style = {
         left: '0px'
     }
-
+    console.log('home page products', products);
 
     return (
         <div>

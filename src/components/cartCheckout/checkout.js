@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link } from "react-router-dom";
 
 export const CartCheckOut = () => {
+    const cartProdcuts = useSelector(state => state.CartReducer);
+    const [cartPrice, setPrice] = useState(0);
+
+   useEffect(() => {
+    let price = 0;
+    cartProdcuts.map(function (product) {
+        price = price + product.price;
+    })
+    setPrice(price);
+   }, [cartProdcuts])
     return (
         <div className="row">
                     <div className="col-12 col-md-6 col-lg-4">
@@ -48,9 +59,9 @@ export const CartCheckOut = () => {
                             </div>
 
                             <ul className="cart-total-chart">
-                                <li><span>Subtotal</span> <span>$59.90</span></li>
+                                <li><span>Subtotal</span> <span>${cartPrice}</span></li>
                                 <li><span>Shipping</span> <span>Free</span></li>
-                                <li><span><strong>Total</strong></span> <span><strong>$59.90</strong></span></li>
+                                <li><span><strong>Total</strong></span> <span><strong>${cartPrice}</strong></span></li>
                             </ul>
                             <Link to="/checkout" className="btn karl-checkout-btn">Proceed to checkout</Link>
                         </div>

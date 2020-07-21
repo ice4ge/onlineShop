@@ -3,7 +3,6 @@ import * as actions from '../actions/actionNames';
 export const ProductsService = (state = [], action) => {
     switch (action.type) {
         case actions.TOTAL_PRODUCTS:
-            console.log('reducer filterr', action.payLoad)
             return state = action.payLoad;
         case actions.GET_FILTER:
             return state = action.payLoad;
@@ -11,7 +10,14 @@ export const ProductsService = (state = [], action) => {
     return state;
 }
 
-
+export const shopNames = (state = [], action) => {
+    switch (action.type) {
+        case actions.SHOP_NAMES:
+            return action.payLoad;
+        default:
+            return state;
+    }
+}
 
 export const ProductPreview = (state = {}, action) => {
     switch (action.type) {

@@ -30,7 +30,6 @@
     }).trigger("resize");
 
     var welcomeSlide = $('.welcome_slides');
-    console.log('welcome slide', welcomeSlide.owlCarousel);
 
     // :: 2.0 Welcome Slider Active Code
     if ($.fn.owlCarousel) {
@@ -192,7 +191,6 @@
             values: [value_min, value_max],
             slide: function (event, ui) {
                 var result = label_result + " " + unit + ui.values[0] + ' - ' + unit + ui.values[1];
-                console.log(t);
                 t.closest('.slider-range').find('.range-price').html(result);
             }
         });

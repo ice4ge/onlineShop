@@ -1,6 +1,8 @@
 import React from 'react';
 import { CART_ADD } from '../../store/actions/actionNames';
 import { useDispatch } from 'react-redux';
+import { Carousel } from 'react-bootstrap';
+
 
 export const PreviewModal = ({ PreviewState }) => {
     const dispatch = useDispatch();
@@ -23,7 +25,14 @@ export const PreviewModal = ({ PreviewState }) => {
                                 <div className="row">
                                     <div className="col-12 col-lg-5">
                                         <div className="quickview_pro_img">
-                                            <img src={PreviewState.img} alt="" />
+                                            <Carousel pause={true}>
+                                                {PreviewState.img && PreviewState.img.map((item, i) =>
+                                                    <Carousel.Item key={i}>
+                                                        <img className="carouse_images" src={item} alt="" />
+                                                    </Carousel.Item>
+                                                )}
+                                            </Carousel>
+                                            <p>DESCRIPTION:  <span>{PreviewState.description}</span></p>
                                         </div>
                                     </div>
                                     <div className="col-12 col-lg-7">
@@ -38,7 +47,16 @@ export const PreviewModal = ({ PreviewState }) => {
                                             </div>
                                             <h5 className="price">${PreviewState.price}</h5>
                                             <p>{PreviewState.text}</p>
-                                            <a href="#">View Full Product Details</a>
+                                            <div className="modal_ads">
+                                                <h5>NAME:  <p>{PreviewState.name}</p></h5>
+                                                <h5>
+                                                    SIZE: 
+                                                    {PreviewState.size && PreviewState.size.map((n, i) =>
+                                                        <p key={i}>{n},</p>
+                                                    )}
+                                                </h5>
+
+                                            </div>
                                         </div>
                                         <form className="cart" method="post">
                                             <div className="quantity">

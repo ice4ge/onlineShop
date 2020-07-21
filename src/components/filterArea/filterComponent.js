@@ -102,7 +102,6 @@ export const FilterArea = (props) => {
         props.setSizeProps(productsFilteredBySize);
         props.filter('size', productsFilteredBySize);
     }
-    console.log('true or false', filterBytypes)
     return (
         <div className="col-12 col-md-4 col-lg-3">
             <div className="shop_sidebar_area">

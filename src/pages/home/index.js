@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Carousel } from 'react-bootstrap';
 import * as actions from '../../store/actions/actionNames';
@@ -17,7 +17,6 @@ import { SideBar } from '../../components/sideBar';
 
 export const HomePage = () => {
     const dispatch = useDispatch();
-
     //... Function that turn the preview modal on ..
     useEffect(() => {
         dispatch({ type: actions.PREVIEW_CHANGE });
@@ -33,8 +32,11 @@ export const HomePage = () => {
     const style = {
         left: '0px'
     }
-    console.log('home page products', products);
+    const [newProduct, setNewProduct] = useState(products);
 
+    useEffect(() => {
+        setNewProduct(products)
+    }, [products])
     return (
         <div>
             <SideBar />
@@ -57,7 +59,7 @@ export const HomePage = () => {
                 </section>
                 <CategoryComponent />
                 <PreviewModal PreviewState={PreviewState} />
-                <NewProductsComponent products={products} />
+                <NewProductsComponent products={newProduct} />
                 <OfferAreaComponent />
                 <Footer />
             </div>

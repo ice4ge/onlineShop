@@ -1,11 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { CART_PRODUCTS_CLEAR } from '../../store/actions/actionNames';
 
 import { CartProducts } from './products';
 import { Link } from 'react-router-dom';
 
 export const CartProductStateComponent = () => {
     const products = useSelector(state => state.CartReducer);
+    const dispatch = useDispatch()
+
+    const clearCartProducts = () => {
+        dispatch({type: CART_PRODUCTS_CLEAR})
+    }
 
     return (
         <div className="row">
@@ -32,8 +38,8 @@ export const CartProductStateComponent = () => {
                         <Link to="/shop">Continue shoping</Link>
                     </div>
                     <div className="update-checkout w-50 text-right">
-                        <a href="#">clear cart</a>
-                        <a href="#">Update cart</a>
+                        <p onClick={() => clearCartProducts()}>clear cart</p>
+                        <p>Update cart</p>
                     </div>
                 </div>
 

@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react';
 import { ProductsList } from './products';
 import { shoes } from './filterData';
 import { accessory } from './filterData';
+import Loader from 'react-loader-spinner';
 
 
 export const NewProductsComponent = ({ products }) => {
-
-    const [initialShowcase, setShowcase] = useState(products.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date)
-    }));
-
+    const [load, setLoad] = useState(true);
+    useEffect(() => {
+        setTimeout(function () {
+            setLoad(false)
+        }, 5000)
+    })
+    const [initialShowcase, setShowcase] = useState();
 
     //... New products filter function..
     const filter = (filterKey, filterType) => {
-        if (filterKey === 'all') 
-        {
+        if (filterKey === 'all') {
             setShowcase(products);
-        } 
-        else if (filterType === 'shoes') 
-        {
+        }
+        else if (filterType === 'shoes') {
             let filtered = [];
             products.map(function (item, i) {
                 for (var i = 0; i < shoes.length; i++) {
@@ -29,9 +30,8 @@ export const NewProductsComponent = ({ products }) => {
                 }
             })
             setShowcase(filtered);
-        } 
-        else if (filterType === 'accessory') 
-        {
+        }
+        else if (filterType === 'accessory') {
             let filtered = [];
             products.map(function (item, i) {
                 for (var j = 0; j < accessory.length; j++) {
@@ -42,19 +42,15 @@ export const NewProductsComponent = ({ products }) => {
             })
             setShowcase(filtered);
         }
-        else if(filterType === 'gender')
-        {
+        else if (filterType === 'gender') {
             setShowcase(products.filter(item => item.gender == filterKey));
         }
     }
 
     //... Filter latest products..
     useEffect(() => {
-        setShowcase([...products.sort(function (a, b) {
-            return new Date(b.date) - new Date(a.date)
-        })]);
-    }, [products])
-
+        setShowcase(products);
+    }, [products]);
     return (
         <div>
             <section class="new_arrivals_area section_padding_100_0 clearfix">
@@ -79,10 +75,25 @@ export const NewProductsComponent = ({ products }) => {
                 </div>
 
                 <div class="container">
-                    <div class="row karl-new-arrivals">
-                        {initialShowcase.slice(0, 6).map((item, i) =>
-                            <ProductsList key={i} gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
-                        )}
+                    <div class="row karl-new-arrivals contain">
+                        {load ?
+                            <Loader
+                                type="Puff"
+                                color="#00BFFF"
+                                height={100}
+                                width={100}
+                                timeout={3000} //3 secs
+                            /> :
+                            <>
+                                {initialShowcase.sort(function (a, b) {
+                                    return new Date(b.date) - new Date(a.date)
+                                }).slice(0, 6).map((item, i) =>
+                                    <ProductsList key={i} gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
+                                )}
+                            </>
+                        }
+
+
                     </div>
                 </div>
             </section>

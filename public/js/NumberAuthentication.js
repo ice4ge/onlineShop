@@ -14,7 +14,6 @@ function phoneAuth() {
         //s is in lowercase
         window.confirmationResult=confirmationResult;
         coderesult=confirmationResult;
-        console.log(coderesult);
         alert("Message sent");
     }).catch(function (error) {
         alert(error.message);
@@ -25,7 +24,6 @@ function codeverify() {
     coderesult.confirm(code).then(function (result) {
         alert("Successfully registered");
         var user=result.user;
-        console.log(user);
     }).catch(function (error) {
         alert(error.message);
     });

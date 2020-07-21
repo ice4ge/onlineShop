@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { BagState } from './bagMenu';
+import { CART_PRODUCT_DELETE } from '../../../store/actions/actionNames';
 
 export const HeadSection = () => {
 
@@ -10,6 +11,7 @@ export const HeadSection = () => {
     const [priceCount, setPrice] = useState(0);
     const bagProducts = useSelector(state => state.CartReducer);
 
+    const dispatch = useDispatch();
     //--- Drop down menu style--
     const DropStyle = {
         display: 'none'
@@ -27,9 +29,11 @@ export const HeadSection = () => {
 
     //... Count total price in cart..
     useEffect(() => {
+        let prices = 0;
         for (var i = 0; i < bagProducts.length; i++) {
-            setPrice(priceCount + bagProducts[i].price);
+            prices += bagProducts[i].price
         }
+        setPrice(prices);
     }, [bagProducts]);
 
     //...Side bar toggle function..
@@ -42,6 +46,10 @@ export const HeadSection = () => {
             target.left = '0px';
             document.getElementById('wrapper').className = "";
         }
+    }
+
+    const deleteCartProduct = (deleteTarget) => {
+        dispatch({type: CART_PRODUCT_DELETE, payLoad: deleteTarget});
     }
 
     return (
@@ -62,7 +70,7 @@ export const HeadSection = () => {
                                             <i className="ti-bag"></i> Your Bag ${priceCount}</p>
                                         <ul className="cart-list" ref={dropDown} style={DropStyle}>
                                             {bagProducts.map((item, i) =>
-                                                <BagState bagProducts={bagProducts[i]} />
+                                                <BagState deleteCartProduct={deleteCartProduct} bagProducts={bagProducts[i]} />
                                             )}
                                             <li className="total">
                                                 <span className="pull-right">Total: ${priceCount}</span>

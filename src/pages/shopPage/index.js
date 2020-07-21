@@ -10,7 +10,7 @@ import { FilterArea } from '../../components/filterArea';
 import { ShopFilteredResult } from '../../components/shopFilterResult/mainWindow';
 import { SideBar } from '../../components/sideBar';
 import { PreviewModal } from '../../components/previewModal';
-import firebase from '../../components/firebase';
+import Loader from 'react-loader-spinner';
 
 
 export const ShopPage = () => {
@@ -20,7 +20,8 @@ export const ShopPage = () => {
     const products = useSelector(state => state.ProductsService);
     const PreviewState = useSelector(state => state.ProductPreview);
 
-    console.log('products', products);
+
+
 
     const [showCase, setShowcase] = useState(products);
     const [virtualSets, setVirtualSets] = useState(products);
@@ -36,7 +37,6 @@ export const ShopPage = () => {
         setSizeKey(sizes);
     }
 
-    const store = firebase.firestore();
     const filterArray = (filterKey, filterType) => {
         if (filterKey == 'price') {
             setShowcase(virtualSets.filter(item => item[filterKey] <= filterType));
@@ -87,10 +87,10 @@ export const ShopPage = () => {
 
     const filterProducts = (range, type) => {
         let filterResult = products;
-        for(var i = 0; i < range[1].subProperty.length; i++) {
-            if(range[1].subProperty[i].select === true) {
+        for (var i = 0; i < range[1].subProperty.length; i++) {
+            if (range[1].subProperty[i].select === true) {
                 filterResult = filterResult.filter(item => item.brand == range[1].subProperty[i].filter);
-            } 
+            }
         }
         for (var i = 0; i < range[0].subProperty.length; i++) {
             if (range[0].subProperty[i].select === true) {
@@ -111,7 +111,13 @@ export const ShopPage = () => {
         setShowcase(filterResult);
         setVirtualSets(filterResult);
     }
-    console.log('showcase changing', showCase)
+
+    const [load, setLoad] = useState(true);
+    useEffect(() => {
+        setTimeout(function () {
+            setLoad(false)
+        }, 6000)
+    }, [])
     return (
         <div>
             <SideBar />
@@ -121,7 +127,21 @@ export const ShopPage = () => {
                     <div className="container">
                         <div className="row">
                             <FilterArea setSizeProps={setSizeProps} filterProducts={filterProducts} size={size} filter={filterArray} />
-                            <ShopFilteredResult products={showCase} />
+
+                            <div className="col-12 col-md-8 col-lg-9">
+                                {load ?
+                                    <Loader
+                                    className="contain"
+                                        type="Puff"
+                                        color="#00BFFF"
+                                        height={100}
+                                        width={100}
+                                        timeout={3000} //3 secs
+                                    /> :
+
+                                    <ShopFilteredResult products={showCase} />
+                                }
+                            </div>
                         </div>
                     </div>
                 </section>

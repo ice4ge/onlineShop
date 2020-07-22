@@ -136,7 +136,7 @@ export const ShopPage = () => {
                                         color="#00BFFF"
                                         height={100}
                                         width={100}
-                                        timeout={3000} //3 secs
+                                        timeout={4000} //3 secs
                                     /> :
 
                                     <ShopFilteredResult products={showCase} />

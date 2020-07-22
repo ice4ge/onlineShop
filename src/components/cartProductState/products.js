@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CART_PRODUCT_DELETE } from '../../store/actions/actionNames';
 import { ProductsList } from '../NewProducts/products';
+import { PRICE_CHANGE, INITIAL_PRICE } from '../../store/actions/actionNames';
 
 export const CartProducts = ({ productList }) => {
     const [productPrice, setPrice] = useState();
     const [productNumber, setNumber] = useState();
+
+    const dispatch = useDispatch();
     useEffect(() => {
         setPrice(productList.price);
         setNumber(1);
     },[productList])
+    useEffect(() => {
+        dispatch({type: INITIAL_PRICE, payLoad: productList.price});
+    }, [])
+
+    const totalPrice = useSelector(state => state.cartTotalPrice);
+    console.log(totalPrice);
 
     const setProductPrice = (setKey) => {
         if(setKey === 'minus') 
         {
             setPrice(productPrice - productList.price);
             setNumber(productNumber - 1);
+            dispatch({type: PRICE_CHANGE, payLoad: totalPrice - productList.price})
         }
         else 
         {
             setPrice(productPrice + productList.price);
             setNumber(productNumber + 1);
+            dispatch({type: PRICE_CHANGE, payLoad: totalPrice + productList.price})
         }
     }
-    const dispatch = useDispatch();
     useEffect(() => {
         if(productNumber === 0) {
             dispatch({type: CART_PRODUCT_DELETE, payLoad: productList.id})

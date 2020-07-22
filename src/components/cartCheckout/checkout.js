@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 export const CartCheckOut = () => {
     const cartProdcuts = useSelector(state => state.CartReducer);
+    const totalPrice = useSelector(state => state.cartTotalPrice);
     const [cartPrice, setPrice] = useState(0);
+    const [total, setTotal] = useState(totalPrice);
+
 
    useEffect(() => {
     let price = 0;
@@ -14,6 +17,12 @@ export const CartCheckOut = () => {
     })
     setPrice(price);
    }, [cartProdcuts])
+   useEffect(() => {
+       setTotal(totalPrice);
+   }, [totalPrice])
+   const changeShipping = (shipping) => {
+       setTotal(totalPrice + shipping);
+   }
     return (
         <div className="row">
                     <div className="col-12 col-md-6 col-lg-4">
@@ -36,17 +45,17 @@ export const CartCheckOut = () => {
                             </div>
 
                             <div className="custom-control custom-radio mb-30">
-                                <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input"/>
+                                <input type="radio" id="customRadio1" name="customRadio" onClick={() => changeShipping(4.99)} className="custom-control-input"/>
                                 <label className="custom-control-label d-flex align-items-center justify-content-between" for="customRadio1"><span>Next day delivery</span><span>$4.99</span></label>
                             </div>
 
                             <div className="custom-control custom-radio mb-30">
-                                <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input"/>
+                                <input type="radio" id="customRadio2" name="customRadio" onClick={() => changeShipping(1.99)} className="custom-control-input"/>
                                 <label className="custom-control-label d-flex align-items-center justify-content-between" for="customRadio2"><span>Standard delivery</span><span>$1.99</span></label>
                             </div>
 
                             <div className="custom-control custom-radio">
-                                <input type="radio" id="customRadio3" name="customRadio" className="custom-control-input"/>
+                                <input type="radio" id="customRadio3" name="customRadio" onClick={() => changeShipping(0)} className="custom-control-input"/>
                                 <label className="custom-control-label d-flex align-items-center justify-content-between" for="customRadio3"><span>Personal Pickup</span><span>Free</span></label>
                             </div>
                         </div>
@@ -59,9 +68,9 @@ export const CartCheckOut = () => {
                             </div>
 
                             <ul className="cart-total-chart">
-                                <li><span>Subtotal</span> <span>${cartPrice}</span></li>
+                                <li><span>Subtotal</span> <span>${totalPrice}</span></li>
                                 <li><span>Shipping</span> <span>Free</span></li>
-                                <li><span><strong>Total</strong></span> <span><strong>${cartPrice}</strong></span></li>
+                                <li><span><strong>Total</strong></span> <span><strong>${total}</strong></span></li>
                             </ul>
                             <Link to="/checkout" className="btn karl-checkout-btn">Proceed to checkout</Link>
                         </div>

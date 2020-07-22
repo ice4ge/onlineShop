@@ -12,3 +12,14 @@ export const CartReducer = (state = [], action) => {
             return state;
     }
 }
+
+export const cartTotalPrice = (state = 0, action) => {
+    switch (action.type) {
+        case actions.INITIAL_PRICE: 
+            return state + action.payLoad;
+        case actions.PRICE_CHANGE:
+            return action.payLoad; 
+        default:
+            return state;
+    }
+}

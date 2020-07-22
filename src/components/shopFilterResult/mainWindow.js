@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { CART_ADD } from '../../store/actions/actionNames';
 import { PREVIEW_SET } from '../../store/actions/actionNames';
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import { FaAngleDoubleRight } from "react-icons/fa";
 
 
 import { Carousel } from 'react-bootstrap';
@@ -14,7 +16,7 @@ export const ShopFilteredResult = ({ products }) => {
     const [count, setCount] = useState(0);
     const [start, setStart] = useState(0);
     const [end, setEnd] = useState(12);
-    console.log(products.length)
+    const scroll = useRef();
 
     //... Add to cart function ..
     const addCart = (product) => {
@@ -28,11 +30,24 @@ export const ShopFilteredResult = ({ products }) => {
 
     //... Page pagination ..
     useEffect(() => {
-        setCount(Math.round(products.length / 12))
+        const initialCount = Math.round(products.length / 12);
+        setCount(initialCount);
     }, [products]);
     const paginationPage = (number) => {
         setStart(number * 12 - 12);
         setEnd(number * 12);
+    }
+    const scrollRight = () => {
+        console.log(scroll.current.scrollTop)
+        if(count > 5 ) {
+            scroll.current.scrollBy(50, 0)
+        }
+    }
+    const scrollLeft = () => {
+        scroll.current.scrollTop = 0;
+        if(count > 5 ) {
+            scroll.current.scrollBy(-50, 0)
+        }
     }
     return (
         <>
@@ -63,12 +78,14 @@ export const ShopFilteredResult = ({ products }) => {
             </div>
 
             <div className="shop_pagination_area wow fadeInUp" data-wow-delay="1.1s">
-                <nav aria-label="Page navigation">
-                    <ul className="pagination pagination-sm">
+                <nav aria-label="Page navigation" className="navigation">
+                    {count > 0 && <FaAngleDoubleLeft onClick={() => scrollLeft()} />}
+                    <ul ref={scroll} className="pagination pagination-sm" id="style-15">
                         {Array.from(Array(count), (e, i) => {
                             return <li key={i} className="page-item" onClick={() => paginationPage(i + 1)}><a className="page-link">{i + 1}</a></li>
                         })}
                     </ul>
+                    {count > 0 && <FaAngleDoubleRight onClick={() => scrollRight()}/>}
                 </nav>
             </div>
         </>

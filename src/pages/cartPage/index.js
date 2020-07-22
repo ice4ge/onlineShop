@@ -11,6 +11,7 @@ export const CartPage = () => {
     const style = {
         left: '0px',
     }
+    
     return (
         <div>
             <SideBar />

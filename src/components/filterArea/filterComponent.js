@@ -72,7 +72,6 @@ export const FilterArea = (props) => {
         color: 'black',
     }
 
-    //...Size filter highlight ..
     const highlighted = document.getElementsByClassName('highlight');
     const highlight = (count) => {
         for (var i = 0; i < highlighted.length; i++) {

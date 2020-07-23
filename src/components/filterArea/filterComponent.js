@@ -25,7 +25,7 @@ export const FilterArea = (props) => {
             setTypeFilter(typeSubClothingFilters)
         } else if (text === 'Shoes') {
             setTypeFilter(typeSubShoesFilters)
-        } else {
+        } else if (text === 'Accessories') {
             setTypeFilter(typeSubAccessoryFilters)
         }
     }
@@ -50,18 +50,22 @@ export const FilterArea = (props) => {
 
     //... Highlight selected type filter .. 
     const typeFilterEnable = (number) => {
+        let filterArray = [];
         for (var i = 0; i < typeFilter.length; i++) {
             if (i != number) {
-                typeFilter[i].select = false;
+                filterArray.push({ ...typeFilter[i], select: false });
             }
-            if (typeFilter[number].select == false) {
-                typeFilter[number].select = true;
-            }
-            else {
-                typeFilter[number].select = false;
+            else if (i == number){
+                if (typeFilter[i].select == false) {
+                    filterArray.push({ ...typeFilter[i], select: true });
+                } else {
+                    filterArray.push({ ...typeFilter[i], select: false });
+                }
             }
         }
-        props.filterProducts(filterBytypes, typeFilter);
+        setTypeFilter(filterArray);
+        props.filterProducts(filterBytypes, filterArray);
+        filterArray = [];
     }
     const sizeStyle = {
         background: 'white',
@@ -72,24 +76,24 @@ export const FilterArea = (props) => {
     const highlighted = document.getElementsByClassName('highlight');
     const highlight = (count) => {
         for (var i = 0; i < highlighted.length; i++) {
-            if(i != count) {
+            if (i != count) {
                 highlighted[i].style.background = 'white';
-                highlighted[i].style.color = 'black';  
+                highlighted[i].style.color = 'black';
             }
         }
-        if(highlighted[count].style.background == 'white') {
+        if (highlighted[count].style.background == 'white') {
             highlighted[count].style.background = 'red';
             highlighted[count].style.color = 'white';
-        }else {
+        } else {
             highlighted[count].style.background = 'white';
             highlighted[count].style.color = 'black';
         }
         const productsFilteredBySize = props.size;
         for (var i = 0; i < productsFilteredBySize.length; i++) {
-            
+
             if (i != count) {
                 productsFilteredBySize[i].select = false;
-            }else {
+            } else {
                 if (productsFilteredBySize[count].select == false) {
                     productsFilteredBySize[count].select = true;
                 }
@@ -97,7 +101,7 @@ export const FilterArea = (props) => {
                     productsFilteredBySize[count].select = false;
                 }
             }
-           
+
         }
         props.setSizeProps(productsFilteredBySize);
         props.filter('size', productsFilteredBySize);
@@ -174,8 +178,8 @@ export const FilterArea = (props) => {
                     <div className="widget-desc">
                         <ul className="d-flex justify-content-between" id="style-4">
                             {props.size && props.size.map((item, i) =>
-                                <li 
-                                onMouseDown={() => highlight(i)}>
+                                <li
+                                    onMouseDown={() => highlight(i)}>
                                     <p id="general" style={sizeStyle} className='highlight'>{item.size}</p>
                                 </li>
                             )}

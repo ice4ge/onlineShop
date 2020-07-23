@@ -88,7 +88,7 @@ export const NewProductsComponent = ({ products }) => {
                                 {initialShowcase.sort(function (a, b) {
                                     return new Date(b.date) - new Date(a.date)
                                 }).slice(0, 6).map((item, i) =>
-                                    <ProductsList key={i} gender={item.gender} Obj={products[i]} img={item.img} price={item.price} description={item.description} />
+                                    <ProductsList key={i} gender={item.gender} Obj={initialShowcase[i]} img={item.img} price={item.price} description={item.description} />
                                 )}
                             </>
                         }

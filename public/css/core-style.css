@@ -1749,6 +1749,15 @@ img {
 #style-15::-webkit-scrollbar {
     display: none;
   }
+
+.size_select {
+    width: 250px;
+    margin-left: 50px;
+    padding-left: 10px;
+    transition-duration: 0.5s;
+    color: #212529;
+    outline: none;
+}
   
   /* Hide scrollbar for IE, Edge and Firefox */
   #style-15 {

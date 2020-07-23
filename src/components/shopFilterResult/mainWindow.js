@@ -33,20 +33,21 @@ export const ShopFilteredResult = ({ products }) => {
         const initialCount = Math.round(products.length / 12);
         setCount(initialCount);
     }, [products]);
+    
     const paginationPage = (number) => {
         setStart(number * 12 - 12);
         setEnd(number * 12);
+        document.documentElement.scrollTop = 0;
     }
     const scrollRight = () => {
-        console.log(scroll.current.scrollTop)
         if(count > 5 ) {
-            scroll.current.scrollBy(50, 0)
+            scroll.current.scrollBy(70, 0)
         }
     }
     const scrollLeft = () => {
         scroll.current.scrollTop = 0;
         if(count > 5 ) {
-            scroll.current.scrollBy(-50, 0)
+            scroll.current.scrollBy(-70, 0)
         }
     }
     return (
@@ -70,7 +71,7 @@ export const ShopFilteredResult = ({ products }) => {
                             <div className="product-description">
                                 <h4 className="product-price">${item.price}</h4>
                                 <p>{item.name}</p>
-                                <p class="add-to-cart-btn" onClick={() => addCart(item)}>ADD TO CART</p>
+                                <p class="add-to-cart-btn" data-toggle="modal" data-target="#quickview" onClick={() => setProductPreview(item)}>ADD TO CART</p>
                             </div>
                         </div>
                     )}

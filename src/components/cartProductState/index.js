@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 export const CartProductStateComponent = () => {
     const products = useSelector(state => state.CartReducer);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    console.log(products);
 
     const clearCartProducts = () => {
         dispatch({type: CART_PRODUCTS_CLEAR})

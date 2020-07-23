@@ -117,7 +117,7 @@ export const FilterArea = (props) => {
                                         <ul className="sub-menu collapse" id={item.toggleTarget}>
                                             {item.subProperty.map((subs, k) =>
                                                 <>
-                                                    <li onClick={() => filter(subs.target, filterBytypes)}
+                                                    <li onClick={() => filter(subs.target, subs.filter)}
                                                         onMouseDown={() => changeType(subs.text)}
                                                         onMouseUp={() => enableFilter(i, k)}
                                                     >

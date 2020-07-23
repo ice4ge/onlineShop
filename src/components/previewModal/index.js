@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { CART_ADD } from '../../store/actions/actionNames';
 import { useDispatch } from 'react-redux';
 import { Carousel } from 'react-bootstrap';
@@ -6,9 +6,11 @@ import { Carousel } from 'react-bootstrap';
 
 export const PreviewModal = ({ PreviewState }) => {
     const dispatch = useDispatch();
+    const size = useRef();
 
     //... Add to cart function ..
     const cartAdd = () => {
+        PreviewState = {...PreviewState, size: size.current.value};
         dispatch({ type: CART_ADD, payLoad: PreviewState });
     }
     return (
@@ -50,10 +52,13 @@ export const PreviewModal = ({ PreviewState }) => {
                                             <div className="modal_ads">
                                                 <h5>NAME:  <p>{PreviewState.name}</p></h5>
                                                 <h5>
-                                                    SIZE: 
-                                                    {PreviewState.size && PreviewState.size.map((n, i) =>
-                                                        <p key={i}>{n},</p>
-                                                    )}
+                                                    SIZE:
+                                                    <select className="size_select" ref={size}>
+                                                        <option value="">Please chose the size</option>
+                                                        {PreviewState.size && PreviewState.size.map((n, i) =>
+                                                            <option>{n}</option>
+                                                        )}
+                                                    </select>
                                                 </h5>
 
                                             </div>

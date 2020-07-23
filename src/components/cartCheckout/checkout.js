@@ -8,6 +8,7 @@ export const CartCheckOut = () => {
     const totalPrice = useSelector(state => state.cartTotalPrice);
     const [cartPrice, setPrice] = useState(0);
     const [total, setTotal] = useState(totalPrice);
+    const [shippingWord, setShippingWord] = useState('Free');
 
 
    useEffect(() => {
@@ -21,7 +22,15 @@ export const CartCheckOut = () => {
        setTotal(totalPrice);
    }, [totalPrice])
    const changeShipping = (shipping) => {
-       setTotal(totalPrice + shipping);
+       if(shipping === 'Free') {
+           setTotal(totalPrice + 0);
+           setShippingWord('Free'); 
+       }
+       else {
+        setTotal(totalPrice + shipping);
+        setShippingWord(`$${shipping}`);
+       }
+       
    }
     return (
         <div className="row">
@@ -55,7 +64,7 @@ export const CartCheckOut = () => {
                             </div>
 
                             <div className="custom-control custom-radio">
-                                <input type="radio" id="customRadio3" name="customRadio" onClick={() => changeShipping(0)} className="custom-control-input"/>
+                                <input type="radio" id="customRadio3" name="customRadio" onClick={() => changeShipping('Free')} className="custom-control-input"/>
                                 <label className="custom-control-label d-flex align-items-center justify-content-between" for="customRadio3"><span>Personal Pickup</span><span>Free</span></label>
                             </div>
                         </div>
@@ -69,7 +78,7 @@ export const CartCheckOut = () => {
 
                             <ul className="cart-total-chart">
                                 <li><span>Subtotal</span> <span>${totalPrice}</span></li>
-                                <li><span>Shipping</span> <span>Free</span></li>
+                                <li><span>Shipping</span> <span>{shippingWord}</span></li>
                                 <li><span><strong>Total</strong></span> <span><strong>${total}</strong></span></li>
                             </ul>
                             <Link to="/checkout" className="btn karl-checkout-btn">Proceed to checkout</Link>

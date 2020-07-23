@@ -12,31 +12,29 @@ export const CartProducts = ({ productList }) => {
     useEffect(() => {
         setPrice(productList.price);
         setNumber(1);
-    },[productList])
+    }, [productList])
     useEffect(() => {
-        dispatch({type: INITIAL_PRICE, payLoad: productList.price});
+        dispatch({ type: INITIAL_PRICE, payLoad: productList.price });
     }, [])
 
+
     const totalPrice = useSelector(state => state.cartTotalPrice);
-    console.log(totalPrice);
 
     const setProductPrice = (setKey) => {
-        if(setKey === 'minus') 
-        {
+        if (setKey === 'minus') {
             setPrice(productPrice - productList.price);
             setNumber(productNumber - 1);
-            dispatch({type: PRICE_CHANGE, payLoad: totalPrice - productList.price})
+            dispatch({ type: PRICE_CHANGE, payLoad: totalPrice - productList.price })
         }
-        else 
-        {
+        else {
             setPrice(productPrice + productList.price);
             setNumber(productNumber + 1);
-            dispatch({type: PRICE_CHANGE, payLoad: totalPrice + productList.price})
+            dispatch({ type: PRICE_CHANGE, payLoad: totalPrice + productList.price })
         }
     }
     useEffect(() => {
-        if(productNumber === 0) {
-            dispatch({type: CART_PRODUCT_DELETE, payLoad: productList.id})
+        if (productNumber === 0) {
+            dispatch({ type: CART_PRODUCT_DELETE, payLoad: productList.id })
         }
     }, [productNumber]);
     return (
@@ -44,14 +42,17 @@ export const CartProducts = ({ productList }) => {
         <tr>
             <td className="cart_product_img d-flex align-items-center">
                 <a href="#"><img className="cart_product_image" src={productList.img} alt="Product" /></a>
-                <h6>{productList.name}</h6>
+                <div>
+                    <h6>{productList.name}</h6>
+                    <p>SIZE: {productList.size}</p>
+                </div>
             </td>
             <td className="price"><span>${productList.price}</span></td>
             <td className="qty">
                 <div className="quantity">
-                    <span className="qty-minus" onClick={()=>setProductPrice('minus')}><i className="fa fa-minus" aria-hidden="true"></i></span>
+                    <span className="qty-minus" onClick={() => setProductPrice('minus')}><i className="fa fa-minus" aria-hidden="true"></i></span>
                     <input type="number" value={productNumber} className="qty-text" step="1" min="0" max="99" name="quantity" />
-                    <span className="qty-plus" onClick={()=>setProductPrice('plus')}><i className="fa fa-plus" aria-hidden="true"></i></span>
+                    <span className="qty-plus" onClick={() => setProductPrice('plus')}><i className="fa fa-plus" aria-hidden="true"></i></span>
                 </div>
             </td>
             <td className="total_price"><span>${productPrice}</span></td>
